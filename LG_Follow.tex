@@ -1,10 +1,9 @@
 \documentclass[conference]{IEEEtran}
 \usepackage{titlesec}
-\usepackage\{array\} 
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{article}
+
 
 \ifCLASSINFOpdf
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -172,7 +171,7 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 \begin{itemize}
     \item If the ID does not exist, the app displays a message such as 'The entered ID does not exist.' \\
     \item If the ID exists, the app compares the hashed password entered by the user with the stored hash associated with the ID. \\
-    \item If the hashes match, the app displays a 'Login Successful' message, indicating a successful log in. \\
+    \item If the hashes match, the app displays a 'Log in Successful' message, indicating a successful log in. \\
     \item If the hashes do not match, the app displays an 'Incorrect password' message.\\
 \end{itemize}
 
@@ -326,11 +325,675 @@ Registration procedure is as follows:}
 
 \
 
-\section{Development environment}
+\section{Development Environment}
 
-\subsection{Choice of software development platform}
+\subsection{Hardware Development Environment}
+
+\subsubsection{Raspberry Pi}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/RaspberryPi.png}
+\caption{Rasberry Pi}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The Raspberry Pi is a small computer commonly used in various programming and IoT projects. Its efficient and cost-effective design makes it popular for home automation and IoT environments.\\
+
+Role:
+\begin{itemize}
+    \item IoT Device Control: The Raspberry Pi serves as the main device for controlling IoT devices in this project. It connects with multiple sensors and actuators (e.g., PIR sensor, temperature sensor), collects data, processes it, and sends it to the system.\\
+    \item Using MQTT Protocol: The Raspberry Pi communicates with other devices or servers through the MQTT protocol, allowing real-time monitoring and control of IoT device states.\\
+    \item Serving as a Matter Bridge: The Raspberry Pi is configured as a Matter bridge to facilitate communication with devices compatible with the Matter Protocol. This setup enables it to communicate with various Matter-compliant IoT devices, allowing centralized control and monitoring of each device via the Spring Boot server. The Matter bridge acts as a communication hub for IoT devices, ensuring interoperability among devices within the same network.\\
+    \item Network Management and Processing: Through network connectivity, the Raspberry Pi connects to the Spring Boot server or the Matter Protocol to transmit and receive data and to process various commands.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Compact Size and Low Power Consumption: Ideal for environments with space and power constraints.\\
+    \item Expandability: The GPIO pins allow easy connection to various sensors and actuators, providing flexibility for various IoT projects.\\
+    \item Matter Bridge Integration: Acting as a Matter bridge, the Raspberry Pi operates as an integration point for interacting with Matter-supported devices. This enables other Matter-compatible devices to connect through the Raspberry Pi, ensuring smooth communication.\\
+    \item Supports Various Languages: Raspberry Pi can be controlled using multiple programming languages such as Python, C++, and Java, offering developers a high degree of flexibility.\\
+\end{itemize}
+
+\subsubsection{Matter Protocol}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/Matter.png}
+    \caption{Matter}
+    \label{fig:enter-label}
+\end{figure}
+\noindent The Matter Protocol is a communication protocol developed to enhance interoperability among smart home and IoT devices. Supported by major IoT device manufacturers, Matter ensures compatibility between devices from different manufacturers within a smart home ecosystem.\\
+
+Role:
+\begin{itemize}
+    \item Provides Interoperability among IoT Devices: With the Matter Protocol, various IoT devices within the same network can communicate seamlessly. This enables the devices used in the project to interact smoothly with one another.\\
+    \item Standardized Data Transmission: The Matter Protocol offers a standardized method for data transmission, simplifying data management and transfer for developers.\\
+    \item Enhanced Security Features: Matter strengthens security by employing encryption for data transmission between devices and an authentication system that only allows approved devices to connect.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Multi-Platform Support: Matter supports various network technologies such as Wi-Fi, Ethernet, Thread, and BLE, allowing flexible configurations suited to the environment.\\
+    \item Simplified Development Process: Matter streamlines communication protocols, making integration easier for developers and ensuring compatibility across a wide range of IoT devices.
+    \item High-Performance Security: It provides security based on authentication, ensuring that data transmission between IoT devices is securely protected.\\
+\end{itemize}
+
+\subsubsection{PIR Sensor}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/PirSensor.jpeg}
+    \caption{PIR Sensor}
+    \label{fig:enter-label}
+\end{figure}
+\noindent A PIR (Passive Infrared) sensor is used to detect motion and is commonly employed in security and home automation systems. It senses infrared signals emitted by the human body to determine motion and can monitor user presence within a specific area.\\
+
+Role:
+\begin{itemize}
+    \item User Detection and Music Control: The PIR sensor detects users within a room and triggers actions like playing or stopping music when certain conditions are met. When a user is detected, it sends a signal to the Spring Boot server to turn on the music. If the user leaves the detection range or after a certain period, it can be configured to stop the music automatically.\\
+    \item Energy Efficiency Maintenance: The PIR sensor helps in reducing unnecessary power consumption by detecting activity in a particular area. When no user is detected, it automatically turns off devices like music or lighting to save energy.\\
+    \item Real-time Status Transmission: It sends real-time movement data to the Spring Boot server, which can then use this information to control other IoT devices based on user location.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Low Power Consumption: The PIR sensor consumes minimal power as it only sends a signal when the detection state changes.\\
+    \item Easy Installation and Connection: It can be easily connected to the GPIO pins of control devices like Raspberry Pi and can be handled with simple signal processing.\\
+    \item Instant Response Time: The PIR sensor is suitable for applications that require immediate feedback as it quickly detects human movement.\\
+    \item Wide Detection Range: It generally provides a broad detection angle, allowing it to sense movement throughout an entire room.\\
+\end{itemize}
+
+\subsection{Software Develepment Platform}
+
+\subsubsection{Linux}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{image/Linux.jpeg}
+    \caption{Linux}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Linux, an operating system based on UNIX, is known for supporting multiple users, multi-tasking, and multi-threading, making it highly suitable for development environments. As an open-source OS, it has been widely distributed and modified for various needs, with popular distributions like Ubuntu. Linux excels in server environments, desktop applications, and embedded systems development due to its flexibility, performance, and robust security features. Its extensive command-line utilities make it particularly adept for working with development boards and IoT devices, allowing seamless integration with hardware. Additionally, Linux’s strong community support ensures quick troubleshooting and continuous enhancements, making it an excellent choice for IoT development and large-scale software projects.\\
+
+\subsubsection{Windows}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/Windows.png}
+    \caption{Windows}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Windows, developed by Microsoft, is one of the most widely used operating systems globally, known for its compatibility with a vast range of software applications and hardware devices. Its graphical user interface and accessibility make it versatile for personal, business, and development use. Windows supports multi-tasking and multi-threading, which enhances its capability for running complex applications and handling high-demand development tasks. With tools like Visual Studio, Windows provides comprehensive support for app development across multiple platforms, including desktop, web, and mobile applications. Windows Subsystem for Linux (WSL) allows developers to use Linux command-line tools and utilities directly on Windows, making it an adaptable choice for cross-platform development. Furthermore, Windows offers strong support for gaming and multimedia applications due to DirectX and hardware acceleration capabilities. Its enterprise-level security options, combined with Microsoft’s extensive documentation and community support, make Windows a reliable operating system for both general-purpose computing and advanced development environments. \\
+
+\subsubsection{macOS}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\linewidth]{image/macOS.jpg}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent macOS, developed by Apple and based on UNIX, is widely recognized for its user-friendly interface and stability, making it a preferred operating system for developers, particularly in design, media, and software development environments. Its robust integration with Apple hardware ensures optimized performance and energy efficiency, which is essential for seamless application testing and development. macOS includes powerful command-line utilities and developer tools such as Xcode, which supports app development for the Apple ecosystem, including iOS, macOS, watchOS, and tvOS. Additionally, the macOS environment provides strong support for multi-tasking and multi-threading, and its UNIX-based architecture offers compatibility with various development frameworks and programming languages, making it highly adaptable to web, mobile, and cloud applications. macOS’s extensive developer community, combined with Apple’s regular updates, ensures high security standards, efficient troubleshooting, and consistent performance, making it an ideal choice for both individual developers and large-scale development teams. \\
+
+\clearpage
+
+\subsection{Language \& Framwork}
+
+\subsubsection{Spring Boot}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/SpringBoot.png}
+    \caption{Spring Boot}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Spring Boot is a lightweight Java-based backend framework that simplifies the process of quickly developing standalone web applications. It reduces the complexity of configuring the Spring Framework by including embedded web servers, such as Tomcat or Jetty, enabling the application to run with minimal additional setup in both development and production environments.\\
+
+Role:
+\begin{itemize}
+\item Web Application Development: Facilitates the rapid development of standalone web applications.\\
+\item Auto-configuration: Provides automatic configuration for various Spring features without needing XML or Java Config classes.\\
+\item  Dependency Management: Simplifies dependency configuration with Spring Boot Starter, boosting development efficiency. \\
+\item Security and Authentication: Easily integrates with Spring Security, allowing for streamlined implementation of authentication and authorization. \\
+\item Asynchronous Processing and Scheduling: Ideal for IoT, mobile, and cloud applications, enabling easy development of REST APIs, asynchronous processing, and scheduling functionalities. \\
+\end{itemize}
+
+Technical Features: 
+\begin{itemize}
+    \item Embedded Server: Bundles web servers such as Tomcat, Jetty, and Undertow, eliminating the need for separate configurations.\\
+    \item Automatic Configuration: Automatically sets up necessary features, streamlining application setup.\\
+    \item Support for Various Environments: Easily adaptable from local development to cloud deployment.\\
+    \item MQTT Support: Enables MQTT messaging with libraries like Eclipse Paho MQTT Client, allowing Spring Boot applications to publish and subscribe to MQTT messages.\\
+\end{itemize}
+
+
+
+\subsubsection{Java}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Java.png}
+    \caption{Java}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Java is an object-oriented programming language known for its platform independence, allowing applications to run consistently across different operating systems. With the motto Write Once, Run Anywhere, Java achieves cross-platform compatibility through the JVM (Java Virtual Machine), enabling stable and efficient application development. \\
+
+Role:
+\begin{itemize}
+    \item Server-side Logic Development: Java’s reliability makes it widely used for server applications.\\ 
+    \item Multithreading and Asynchronous Processing: Java's multithreading and asynchronous processing capabilities are ideal for IoT systems that require real-time data handling.\\
+    \item Large-scale System Operation: Thread management, garbage collection, and robust libraries enable Java to handle high-traffic server applications effectively.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Object-Oriented Programming: High reusability and scalability, making maintenance straightforward.\\
+    \item Platform Independence with JVM: Allows consistent code execution across various platforms via the JVM.\\
+    \item Extensive Standard Libraries: Provides libraries for networking, databases, file handling, and more, supporting efficient application development.\\
+    \item Reliability and Performance: Ensures stability in large-scale systems and guarantees performance in multithreaded environments.\\
+\end{itemize}
+
+\clearpage
+
+\subsubsection{Python}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{image/Python.png}
+    \caption{Python}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\noindent Python is a widely used interpreted language known for its simplicity, readability, and versatility across various applications and platforms. Its ease of use and concise syntax significantly reduce development time and minimize errors, making it a popular choice for developers.
+
+Role:
+\begin{itemize}
+    \item Cross-Platform Compatibility: Python is a cross-platform language that can run on various operating systems (Linux, Windows, Mac) with minimal modifications, providing flexibility and efficient deployment.\\
+    \item Data Processing and Manipulation: Its strengths in string processing and data manipulation make Python ideal for applications involving text and image processing, data analysis, and scientific computing.\\
+    \item Automation and Scripting: Python's readability and flexibility make it suitable for automation tasks, enabling the development of scripts and tools for repetitive tasks and efficient workflows.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Concise and Readable Syntax: Python’s straightforward syntax enhances code readability and reduces development time, contributing to rapid prototyping and easier debugging.\\
+    \item Extensive Libraries: Python offers a rich ecosystem of libraries, including Pandas, NumPy, and OpenCV, which simplify complex operations such as data analysis, machine learning, and image processing.\\
+    \item Community and Documentation: Python boasts a large and active community, providing a wealth of resources, support, and libraries that streamline development.\\
+\end{itemize}
+
+\subsubsection{Flask}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{image/Flask.png}
+    \caption{Flask}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Flask is a lightweight web framework for Python, known for its simplicity, flexibility, and suitability for small to medium-sized web applications and APIs. Flask provides a straightforward foundation for building web applications with minimal setup.\\
+
+Role:
+\begin{itemize}
+    \item RESTful API Development: Flask is optimized for creating RESTful APIs, providing tools for handling HTTP requests and responses, which is ideal for applications requiring data exchange in formats like JSON.\\
+    \item Integration with Python Models: Flask can easily integrate with Python-based machine learning models, making it simple to serve model predictions and data processing results to client applications.\\
+    \item Customizable and Modular: Flask allows developers to include only the components needed for a project, creating a lean and efficient development environment.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Lightweight and Flexible: Designed to be minimalistic, Flask allows developers to build web applications without unnecessary features, ensuring a flexible and tailored environment.\\
+    \item Powerful Routing and Request Handling: Flask’s built-in support for routing and handling HTTP methods makes it suitable for building APIs and web services.\\
+    \item Rich Ecosystem of Extensions: Flask supports numerous extensions, allowing for easy integration of features like authentication, database connections, and caching.\\
+\end{itemize}
+
+
+\subsubsection{React Native}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/ReactNative.png}
+    \caption{React Native}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent React Native is a popular cross-platform framework that allows developers to create apps that work on both iOS and Android from a single codebase, significantly reducing development time and costs. By using JavaScript, a widely-known language, React Native offers accessibility for developers, along with extensive community support and a rich ecosystem of libraries and tools.\\
+
+Role:
+\begin{itemize}
+    \item Cross-platform Development: React Native enables the development of applications that operate seamlessly across iOS and Android, simplifying access for users on both platforms.\\
+    \item Optimized Performance for Unique Services: Chosen for its ability to deliver optimized performance and a smooth user experience, React Native supports the app’s functionalities, including user tracking, sound playback, and song creation from user-drawn images.\\
+    \item Component-based Structure: With its component-based structure, React Native enhances code reusability and organization, making the code easier to manage and maintain.\\
+    \item UI and Logic Separation: React Native allows for the separation of UI components and business logic, increasing code readability and maintainability.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Cross-platform Capability: Allows development for both iOS and Android from a single codebase.\\
+    \item JavaScript Usage: Built with JavaScript, React Native is approachable and integrates well with various development tools.
+    \item Hot Reloading: Supports hot reloading, enabling rapid testing and iterative development.\\
+    \item Reusable and Maintainable Code: The component-based architecture improves reusability, organization, and maintainability, supporting long-term development.\\
+\end{itemize}
+
+
+\subsection{Software \& AI model In Use}
+
+\subsubsection{BRIP}
+
+\noindent BLIP (Bootstrapping Language-Image Pre-training) is a cutting-edge AI model that enables unified vision-language understanding and generation. By training on a large dataset of image-text pairs, BLIP can perform diverse tasks such as image captioning, visual question answering, and text-guided image generation.\\
+
+Role: 
+\begin{itemize}
+    \item Image Captioning: BLIP generates descriptive captions for images, providing a textual representation of visual content, which is useful for accessibility and content categorization.\\
+    \item Visual Question Answering: BLIP interprets visual data to answer questions about images, offering real-time assistance and context comprehension for visual-based tasks.\\
+    \item Text-Guided Image Generation: BLIP creates or modifies images based on textual prompts, bridging the gap between visual creativity and text-based control.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Zero-shot Learning: BLIP’s zero-shot capabilities allow it to adapt to new tasks without additional training data, making it versatile across various applications.\\
+    \item Specialized Language Training: By training on datasets with images and Korean captions, BLIP can generate Korean prompts, making it suitable for localized applications and non-English language tasks.\\
+    \item Enhanced Vision-Language Bridging: BLIP effectively integrates textual and visual data, enabling it to process and produce outputs that combine both modalities seamlessly.\\
+\end{itemize}
+
+\subsubsection{Amazon S3}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/AmazonS3.png}
+    \caption{Amazon S3}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Amazon Simple Storage Service (Amazon S3) is a highly scalable object storage service known for its industry-leading data availability, security, and performance. Amazon S3 provides a robust infrastructure for storing and managing large volumes of data, particularly useful for media files such as images and music.\\
+
+Role:
+\begin{itemize}
+    \item File Storage: Stores generated music files and uploaded image files in S3, with Flask generating music files that the Spring Boot server saves to S3, providing clients with URLs for file download or streaming.\\
+    \item Cloud Storage: Manages large data volumes efficiently, including user-related images and audio files.\\
+    \item Data Management: Used for organizing temporary or outdated data, as well as for backups. Access permissions can be configured to restrict file access to specific users.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Scalability: S3 automatically scales to accommodate large volumes of data as file counts increase.\\
+    \item Reliability: Offers high durability, ensuring data is securely stored.\\
+    \item Flexible Access Management: Access Control Lists (ACLs) and bucket policies allow for detailed permission settings.\\
+\end{itemize}
+
+\subsubsection{MySQL}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/MySQL.png}
+    \caption{MySQL}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent MySQL is a widely used open-source relational database management system (RDBMS) known for its stability, performance, and ability to handle large datasets efficiently. Its robust functionality makes it ideal for managing data-intensive applications, including those that track user locations, manage media files, and facilitate device interactions.\\
+
+Role:
+\begin{itemize}
+    \item Data Storage: Stores and manages user information, generated music metadata (title, creation date, etc.), and music request data. This enables the system to store a wide variety of data permanently for retrieval as needed.\\
+    \item Data Integrity Assurance: Ensures data consistency and integrity through transactions and foreign keys, maintaining stability even when multiple users access data simultaneously.\\
+    \item CRUD Operations: Supports Create, Read, Update, and Delete operations through integration with the Spring Boot application.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+\item SQL-Based: Uses standard SQL queries, making data management straightforward.\\
+\item Scalability: Efficiently manages large transactions and data with scalable architecture.\\
+\item Reliability: Provides strong backup and recovery capabilities to ensure data security.\\
+\end{itemize}
+
+\subsubsection{Amazon RDS (Relational Database Service)}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/AmazonRDS.png}
+    \caption{Amazon RDS}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Amazon RDS is AWS’s managed relational database service, handling database server management and maintenance, allowing developers to focus on data-related tasks rather than setup and maintenance.\\
+
+Role: 
+\begin{itemize}
+    \item MySQL Server Hosting: Supports MySQL and other database engines, making it easy to set up and manage MySQL servers. In this project, RDS manages user information, music metadata, and music requests.\\
+    \item Automated Management: Handles database backups, security patches, and software updates automatically, reducing database management burdens.\\
+    \item Scalability: Supports scale-up/down as traffic or storage needs change. For high read performance, Read Replicas can be added.\\
+\end{itemize}
+
+Specific Functions:
+\begin{itemize}
+    \item Persistent Data Storage: The RDS MySQL server stores user-related data, music metadata, and music requests, ensuring reliable data management even with high request volumes.\\
+    \item Data Backup and Recovery: Performs regular backups automatically, with automatic recovery capabilities to ensure data integrity and reliability.\\
+    \item High Availability: Multi-AZ deployment replicates databases across availability zones, providing high availability and fast recovery in case of failures.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Automatic Backups: Regular backups enable point-in-time recovery.\\
+    \item Security: Supports VPC isolation, AWS IAM integration, and data encryption via AWS Key Management Service (KMS).\\
+    \item Monitoring and Alerts: Integrates with Amazon CloudWatch for real-time database performance monitoring and notifications for any issues.\\
+\end{itemize}
+
+Integration with RDS:
+\begin{itemize}
+    \item Spring Boot: The Spring Boot project connects directly with AWS RDS MySQL, leveraging Spring Data JPA for efficient database interactions. Database URL, username, and password are configured using the RDS endpoint.\\
+    \item RDS MySQL Setup: After creating a MySQL instance in the RDS console, its endpoint and credentials are used to connect the Spring Boot application.\\
+\end{itemize}
+
+\subsubsection{Visual Studio Code}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/VScode.png}
+    \caption{VS Code}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Visual Studio Code (VS Code) is a lightweight and highly customizable code editor developed by Microsoft. Known for its versatility and extensive extension ecosystem, VS Code supports a wide range of programming languages and development environments, making it a popular choice for developers across various fields.\\
+
+Role:
+\begin{itemize}
+    \item Code Editing and Development: VS Code provides a streamlined, efficient environment for writing, editing, and managing code in multiple languages. It offers a powerful, customizable interface that supports development workflows from simple scripts to large projects.\\
+    \item Extension Support: With thousands of extensions available, VS Code allows developers to add language support, frameworks, linters, debuggers, and tools specific to their project needs, enhancing productivity and flexibility.\\
+    \item Remote Development: VS Code’s remote development feature allows users to work on projects hosted on remote servers or in containers, enabling efficient collaboration and resource utilization.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Lightweight and Fast: Designed for speed and efficiency, VS Code is a lightweight editor that quickly adapts to various development environments without significant resource usage.\\
+    \item Integrated Debugging and Git: VS Code includes built-in debugging and Git support, streamlining the development and version control process within a single interface.\\
+    \item Highly Customizable: Through JSON configuration files, settings, and an extensive extension library, VS Code allows for deep customization to meet individual development needs.\\
+\end{itemize}
+
+
+\subsubsection{Android Studio}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/AndroidStudio.jpg}
+    \caption{Android Studio}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Android Studio is Google’s official integrated development environment (IDE) for Android app development, offering a comprehensive suite of tools and resources tailored specifically for Android platforms.\\
+
+Role:
+\begin{itemize}
+    \item Emulator for Testing: It provides a fast and feature-rich emulator, simulating a wide range of Android devices and configurations for thorough testing without needing physical devices.\\
+    \item Extensive Testing Tools: Android Studio includes a variety of testing tools and frameworks that support automated and manual testing, enhancing app quality and stability.\\
+    \item Easy SDK Access: The IDE includes Android SDK and essential tools out-of-the-box, allowing developers to start building Android applications immediately.
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Integrated Emulator: Fast, powerful emulator to test app functionality across device configurations.\\
+    \item Comprehensive Testing Support: Tools for unit, UI, and integration testing.\\
+    \item Code Inspection and Lint: Automates code quality checks and flags potential issues.\\
+\end{itemize}
+
+\clearpage
+
+\subsubsection{Xcode}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Xcode.jpg}
+    \caption{Xcode}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Xcode is Apple’s official IDE for developing applications on iOS, macOS, watchOS, and tvOS, offering a complete suite of tools and resources to streamline development for Apple’s platforms.\\
+
+Role:
+\begin{itemize}
+    \item Apple Platform Development: Xcode is essential for creating applications for Apple’s ecosystem, providing all necessary tools to develop iOS and macOS applications quickly and efficiently. \\
+    \item Built-In Simulator: The simulator allows for testing applications without needing a physical device, supporting various iOS versions and device types.\\
+    \item Storyboard and App Structure Visualization: The storyboard feature enables developers to see the structure of the app at a glance, aiding in the systematic design of complex applications.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Drag-and-Drop Interface Builder: Simplifies UI design with visual placement and Auto Layout.\\
+    \item Comprehensive Preview Options: Preview and adjust for multiple devices and screen sizes.
+\end{itemize}
+
+
+\subsubsection{Figma}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Figma.jpg}
+    \caption{Figma}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Figma is a cloud-based design and prototyping tool used for creating interactive and collaborative design experiences. Known for its flexibility and real-time collaboration features, Figma allows designers and teams to work together seamlessly from anywhere.\\
+
+Role:
+\begin{itemize}
+    \item UI/UX Design: Figma provides a robust platform for designing user interfaces and experiences, with tools to create detailed wireframes, mockups, and high-fidelity designs.\\
+    \item Prototyping: Enables the creation of interactive prototypes that allow designers to simulate user flows and test interactions, providing a clear vision of the final product.\\
+    \item Collaboration: Real-time collaboration allows multiple team members to work simultaneously on the same file, streamlining the feedback process and reducing delays.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Developer-Friendly Inspect Tool: Developers can access design specifications, CSS code, and assets directly, ensuring a smooth design-to-code transition.\\
+    \item Interactive Prototyping and Animation: Offers tools to create interactive animations and transitions, making it easy to visualize and test user interactions.\\
+    \item Cloud-Based and Cross-Platform: Figma operates in the cloud, accessible from any browser and supporting both Windows and macOS, making it highly versatile and collaborative.\\
+\end{itemize}
+
+\clearpage
+
+\section{Specification}
+
+\subsection{Log in}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Login.png}
+    \caption{Log in}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{ID Input}
+\begin{itemize}
+    \item Placeholder: 'Email ID or Phone Number' to guide the user on the input type.\\
+    \item Input Format: Accepts either an email address or a phone number.\\
+    \item Validation: Checks if the input follows the correct format:
+\begin{itemize}
+    \item Email: Format like user@example.com\\
+    \item Phone Number: Numeric format (e.g., 01012345678)\\
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Password Input}
+\begin{itemize}
+    \item Placeholder: Displays "Password" as guidance for the user.\\
+    \item Input Format: Accepts text for password entry, displayed as \# symbols to conceal the input.\\
+\end{itemize}
+
+\subsubsection{Log in Button}
+\begin{itemize}
+    \item Enabled/Disabled State:
+\begin{itemize}
+    \item Enabled: The button becomes active once both ID and password are entered.\\
+    \item Disabled: The button remains inactive if the ID and password fields are empty.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Action: When clicked, the button attempts to log in with the provided ID and password.
+\begin{itemize}
+    \item On Success: Redirects to the main screen.\\
+    \item On Failure: Shows an error message ('The entered ID or password is incorrect').\\
+\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Log in Process}
+\begin{itemize}
+    \item Input Check: When the log in button is clicked, the ID and password are validated against database records.\\
+    \item Password Hashing: The entered password is hashed using the SHA-256 algorithm before being compared to the stored hash in the database.\\
+    \item Authentication and Response:
+\begin{itemize}
+    \item Success: On successful log in, the user is redirected to the main screen.\\
+    \item Failure: If log in fails, an error message ('The entered ID or password is incorrect') is displayed.\\
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Main page}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Home.png}
+    \caption{Home}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\subsubsection{Home Application Power On/Off}
+
+\begin{itemize}
+    \item Power Button: Turns individual appliances On/Off. (In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale.)\\
+    \item When the user clicks the power button for a specific appliance, the application records the device's status (On/Off) in the database or local storage.\\
+    \item Upon status change, the application sends a command to the appliance to toggle its power state.\\
+    \item If the device is currently on, clicking the button will turn it off, and if it is off, clicking the button will turn it on.\\
+\end{itemize}
+
+\subsubsection{LG Follow Function On/Off}
+\begin{itemize}
+    \item Speaker Button: Controls the LG Follow function for audio playback in the room where the appliance is located.(In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale.)\\
+    \item User Location Detection
+\begin{itemize}
+    \item PIR Sensors: PIR (Passive Infrared) sensors installed in each room detect the user’s movement. When the user enters a room, the PIR sensor in that room activates and sends the location data to the Raspberry Pi.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Data Collection and Transmission by Raspberry Pi
+\begin{itemize}
+    \item Raspberry Pi: Acts as a central hub that collects location data from all room PIR sensors. As the user moves from room to room, the Raspberry Pi updates the user’s location in real time.\\
+    \item Matter Protocol: Raspberry Pi communicates with AI speakers and other room speakers via the Matter protocol to control audio output based on the user’s current location.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Audio Transition
+\begin{itemize}
+    \item When the user enters a new room, the Raspberry Pi sends a command to stop audio playback in the previous room’s speaker and switch the audio to the speaker in the current room.\\
+    \item This setup allows the user to hear audio naturally in each new room as they move throughout the house.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item User Control Options for LG Follow
+\begin{itemize}
+    \item Global LG Follow On/Off: Users can toggle the global Follow feature on or off in the app. When enabled, audio transitions between rooms as the user moves.\\
+    \item LG Follow On/Off for Specific Devices: Users can enable or disable the Follow feature for specific appliances in particular rooms, allowing more customized control over where audio follows them.\\
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Add Product Button ('+' Button)}
+\begin{itemize}
+    \item Opens a QR code scanning screen to add a new appliance.\\
+    \item When the user clicks the '+' button, the application navigates to the QR code scanning screen.\\
+    \item The user can scan a QR code to register a new appliance, which will then be added to the home screen for control.\\
+\end{itemize}
+
+\subsection{Device Registration}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/QR.png}
+    \caption{Device Registration}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{itemize}
+    \item QR Scanning Frame: A square frame located in the center of the screen where users align the QR code.\\
+    \item QR Code Recognition and Registration
+\begin{itemize}
+    \item Automatic Scanning: When a QR code is aligned within the scanning frame, the app automatically recognizes it without requiring a separate confirmation button.\\
+    \item Validation: Once the QR code is scanned, the app verifies if it corresponds to a valid LG appliance model and matches the format stored in the database.\\
+    \item Registration: If validated, the appliance is registered to the user’s account and linked to the LG Follow feature.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Navigation Upon Successful Scan
+\begin{itemize}
+    \item Automatic Transition: Once the QR code is successfully recognized and the appliance is registered, the app automatically navigates the user back to the main screen.\\
+    \item Confirmation Message: Upon returning to the main screen, a brief confirmation message ('Appliance registered successfully') may appear to inform the user of successful registration.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Error Handling : If the QR code is invalid or unrecognized, an error message appears ('Invalid QR code. Please try again').\\
+    \item     Through these features, users can easily control appliance power, manage room-specific LG Follow audio settings, and add new appliances.\\
+\end{itemize}
+
+
+\subsection{Menu page}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Menu.png}
+    \caption{Menu Page}
+    \label{fig:enter-label}
+\end{figure}
+
+User starts on the home screen and presses the menu button located on the bottom navigation bar, they open the main menu. From there, if the user navigates to the Life section and selects the Sound Sketch button, the app transitions to the Sound Sketch screen, providing them access to that feature. \\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch.png}
+    \caption{Sound Sketch page}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.5\linewidth]{image/SoundSketch2.png}
+    \caption{Sound Sketch}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
+
 
 
