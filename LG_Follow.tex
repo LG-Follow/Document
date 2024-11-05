@@ -432,7 +432,7 @@ Technical Features:
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.4\linewidth]{image/macOS.jpg}
-    \caption{Caption}
+    \caption{macOS}
     \label{fig:enter-label}
 \end{figure}
 
@@ -722,7 +722,7 @@ Technical Features:
     \label{fig:enter-label}
 \end{figure}
 
-\noindent Android Studio is Google’s official integrated development environment (IDE) for Android app development, offering a comprehensive suite of tools and resources tailored specifically for Android platforms.\\
+\noindent Android Studio is Google’s official integrated development environment for Android app development, offering a comprehensive suite of tools and resources tailored specifically for Android platforms.\\
 
 Role:
 \begin{itemize}
@@ -794,33 +794,32 @@ Technical Features:
 
 \section{Specification}
 
-\subsection{Log in}
+\subsection{Log In}
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{image/Login.png}
-    \caption{Log in}
+    \caption{Log In}
     \label{fig:enter-label}
 \end{figure}
 
 \subsubsection{ID Input}
 \begin{itemize}
-    \item Placeholder: 'Email ID or Phone Number' to guide the user on the input type.\\
-    \item Input Format: Accepts either an email address or a phone number.\\
-    \item Validation: Checks if the input follows the correct format:
+    \item Placeholder: 'Email ID' to guide the user on the input type.\\
+    \item Input Format: Accepts either an email address.\\
+    \item Validation: Checks if the input follows the correct format
 \begin{itemize}
     \item Email: Format like user@example.com\\
-    \item Phone Number: Numeric format (e.g., 01012345678)\\
 \end{itemize}
 \end{itemize}
 
 \subsubsection{Password Input}
 \begin{itemize}
-    \item Placeholder: Displays "Password" as guidance for the user.\\
-    \item Input Format: Accepts text for password entry, displayed as \# symbols to conceal the input.\\
+    \item Placeholder: Displays 'Password' as guidance for the user.\\
+    \item Input Format: Accepts text for password entry, displayed as '\textbullet' symbols to conceal the input.\\
 \end{itemize}
 
-\subsubsection{Log in Button}
+\subsubsection{Log in}
 \begin{itemize}
     \item Enabled/Disabled State:
 \begin{itemize}
@@ -849,12 +848,12 @@ Technical Features:
 \end{itemize}
 
 
-\subsection{Main page}
+\subsection{Main Page}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{image/Home.png}
-    \caption{Home}
+    \includegraphics[width=0.5\linewidth]{image/Main.png}
+    \caption{Main Page}
     \label{fig:enter-label}
 \end{figure}
 
@@ -863,15 +862,15 @@ Technical Features:
 \subsubsection{Home Application Power On/Off}
 
 \begin{itemize}
-    \item Power Button: Turns individual appliances On/Off. (In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale.)\\
+    \item Power Button: Turns individual appliances On/Off. (In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale with a strikethrough.)\\
     \item When the user clicks the power button for a specific appliance, the application records the device's status (On/Off) in the database or local storage.\\
     \item Upon status change, the application sends a command to the appliance to toggle its power state.\\
     \item If the device is currently on, clicking the button will turn it off, and if it is off, clicking the button will turn it on.\\
-\end{itemize}
+\end{itemize}\\
 
 \subsubsection{LG Follow Function On/Off}
 \begin{itemize}
-    \item Speaker Button: Controls the LG Follow function for audio playback in the room where the appliance is located.(In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale.)\\
+    \item Speaker Button: Controls the LG Follow function for audio playback in the room where the appliance is located.(In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale with a strikethrough.\\
     \item User Location Detection
 \begin{itemize}
     \item PIR Sensors: PIR (Passive Infrared) sensors installed in each room detect the user’s movement. When the user enters a room, the PIR sensor in that room activates and sends the location data to the Raspberry Pi.\\
@@ -894,7 +893,6 @@ Technical Features:
 \begin{itemize}
     \item User Control Options for LG Follow
 \begin{itemize}
-    \item Global LG Follow On/Off: Users can toggle the global Follow feature on or off in the app. When enabled, audio transitions between rooms as the user moves.\\
     \item LG Follow On/Off for Specific Devices: Users can enable or disable the Follow feature for specific appliances in particular rooms, allowing more customized control over where audio follows them.\\
 \end{itemize}
 \end{itemize}
@@ -936,7 +934,7 @@ Technical Features:
 \end{itemize}
 
 
-\subsection{Menu page}
+\subsection{Menu Page}
 
 \begin{figure}[h!]
     \centering
@@ -945,31 +943,141 @@ Technical Features:
     \label{fig:enter-label}
 \end{figure}
 
-User starts on the home screen and presses the menu button located on the bottom navigation bar, they open the main menu. From there, if the user navigates to the Life section and selects the Sound Sketch button, the app transitions to the Sound Sketch screen, providing them access to that feature. \\
+\noindent User starts on the home screen and presses the menu button located on the bottom navigation bar, they open the menu page. From there, if the user navigates to the Life section and selects the Sound Sketch button, the app transitions to the Sound Sketch screen, providing them access to that feature. \\
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{image/SoundSketch.png}
-    \caption{Sound Sketch page}
+    \caption{Enter Sound Sketch}
     \label{fig:enter-label}
 \end{figure}
 
+\subsection{Sound Sketch Main Page}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1.5\linewidth]{image/SoundSketch2.png}
-    \caption{Sound Sketch}
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch2.png}
+    \caption{Sound Sketch Main Page}
     \label{fig:enter-label}
 \end{figure}
 
+\subsubsection{Record Section}
 
+\begin{itemize}
+    \item The record section, located at the top, displays a list of previously created drawings along with their associated music.
+\begin{itemize}
+    \item Thumbnail: Each record is shown as a thumbnail that displays the user’s actual drawing.\\
+    \item Label: A label is displayed below each thumbnail, allowing users to easily identify each record.\\
+\end{itemize}
+    \item Functionality: Users can select a previous drawing to view the related music information or to play the associated audio.\\
+    \item Saving Records: When a user completes and saves a drawing, it is added to the record section. The actual drawing is displayed as a thumbnail in the record section, and the metadata for the generated music is stored in the MySQL database via Spring Boot.\\
+    \item Music Streaming: When a user selects a specific record thumbnail, the Flask server streams the associated music in real time, allowing the user to listen to it immediately.\\
+\end{itemize}
 
+\subsubsection{Temporary Storage Section}
 
+\begin{itemize}
+    \item The temporary storage section shows the currently active drawing that the user is working on.
+\begin{itemize}
+    \item Thumbnail: The thumbnail displays the user’s current drawing in a large square, making it easy to recognize.\\
+\end{itemize}
+    \item Functionality: Even if the app is closed or the user switches tasks, the ongoing drawing is saved. When the user taps this thumbnail, they can resume working on the saved drawing.\\
+    \item Image Temporary Storage: When a user temporarily saves a drawing, the image data is stored in Redis, a fast-access cache database. This ensures that the user can pause or edit the drawing without losing data, thanks to Redis’s memory-based storage, which minimizes latency and enhances the user experience during the drawing process.\\
+    \item Temporary Data Recovery: When the user selects the saved drawing from the temporary storage section, Redis retrieves the data, allowing the user to resume their work seamlessly.\\
 
+\end{itemize}
 
+\subsubsection{New Start Button}
 
+\begin{itemize}
+    \item The 'New Start' button at the bottom of the screen allows the user to begin a new drawing.\\
+    \item Functionality 
+\begin{itemize}
+    \item Transition to Drawing Page: When clicked, the app navigates to a new page where the user can start a new drawing.\\
+    \item Temporary Data Reset: When a new project is started, the existing temporary data is reset or updated to save the new drawing.\\
 
+\end{itemize}
+\end{itemize}    
+\begin{itemize}
+    \item Reset and Transition to New Page: When the user clicks the New Start button, the current temporary data is reset, and the app navigates to the drawing page to start a fresh project.\\
+    \item Data Management: For every new drawing, Redis either deletes or updates the previous temporary data to store the new drawing as the latest temporary data.\\
+\end{itemize}
 
+\subsection{Sketch Page }
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch3.png}
+    \caption{Sketch Page}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{Canvas Section}
+\begin{itemize}
+    \item The gray background area in the center of the screen serves as a canvas where users can draw freely. This section is dedicated to allowing users to create and edit their drawings.\\
+    \item Drawing Canvas: An interactive canvas where users can draw using various shapes, lines, and colors.\\
+\end{itemize}
+
+\subsubsection{Submit Button}
+\begin{itemize}
+    \item Allows users to submit the completed drawing to the server for music generation.\\
+    \item When clicked, the drawing is temporarily saved in Redis, then sent to the AI system via the Flask server, where music based on the drawing will be generated.\\
+\end{itemize}
+
+\subsubsection{Delete Button}
+\begin{itemize}
+    \item Provides an option to delete the current drawing on the canvas.\\
+    \item When clicked, the current drawing is removed from temporary storage, and the canvas is cleared for a fresh start. A confirmation message may be shown to confirm deletion.\\
+\end{itemize}
+
+\subsubsection{Expand Icon}
+\begin{itemize}
+    \item Allows users to view the drawing in full-screen mode for more detailed work.\\
+    \item When clicked, the canvas expands to full screen, providing a larger workspace for more precise drawing.\\
+\end{itemize}
+
+\subsubsection{Back Icon}
+\begin{itemize}
+    \item Allows users to return to the Sound Sketch main page.\\
+    \item When clicked, the current drawing is temporarily saved in Redis, ensuring it is stored before navigating back to the Sound Sketch main page.\\
+\end{itemize}
+
+\subsubsection{Bottom Navigation Bar}
+\begin{itemize}
+    \item Home, ThinQ, LG Follow Tabs: The bottom navigation bar allows users to switch between the main sections of the app without losing their current work on the Sketch screen.\\
+\end{itemize}
+
+\subsection{Sound Controll}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.35\linewidth]{image/SoundSketch4.png}
+    \caption{Sound Controll}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent When the Submit button is pressed on the Sketch page, the app navigates to the Sound control screen, where users can configure LG Follow settings for different appliances.
+
+\subsubsection{Appliance Icons}
+\begin{itemize}
+    \item  Each room in the displayed floor plan contains icons representing appliances equipped with the LG Follow feature.\\
+    \item Toggle LG Follow: Users can tap on any appliance icon to toggle the LG Follow function for that specific device.\\
+    \item On/Off Visuals
+\begin{itemize}
+    \item If the LG Follow function is On, the appliance icon is displayed in color, indicating active audio tracking for that room.\\
+    \item If the LG Follow function is Off, the icon appears in grayscale, indicating that audio tracking is disabled for that room.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Switching States: Tapping a colored (On) icon switches it to grayscale (Off), turning off the LG Follow function. Conversely, tapping a grayscale (Off) icon switches it to colored (On), enabling the LG Follow function.\\
+\end{itemize}
+
+\subsubsection{Set Up and Skip Buttons}
+\begin{itemize}
+    \item Set Up: Allows users to save their current LG Follow settings.\\
+    \item Skip: Bypasses LG Follow settings.\\
+    \item Pressing either Set Up or Skip will return the user to the Sound Sketch main page.\\
+\end{itemize}
 
 
 
