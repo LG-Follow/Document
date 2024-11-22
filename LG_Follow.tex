@@ -129,16 +129,13 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 \ 
 \subsection{Research on any related software}
 
-\subsubsection{Sonos (Multi-Room Audio Systems): Sonos is a leading brand in multi-room audio systems. Sonos allows users to control audio in various rooms through a smartphone app, letting users sync music in different areas of the house. However, unlike LG Follow, Sonos requires manual control for changing rooms or selecting where to play audio. It does not automatically follow the user based on their movement.}
+\subsubsection{Contrastive Language-Image Pre-training (CLIP): CLIP, developed by OpenAI, is a model trained on a large dataset of text and images to understand and associate visual and textual inputs. It enables users to perform tasks such as image search or classification using natural language prompts without task-specific fine-tuning, utilizing zero-shot capabilities. CLIP works by encoding images and text into a shared high-dimensional space where related pairs are closer together and unrelated pairs are further apart through a contrastive learning approach. While it demonstrates strong generalization capabilities, CLIP can exhibit biases present in its training data and may face challenges with nuanced or context-specific tasks.}
 \
-
 
 \subsubsection{Google Nest and Amazon Echo: Google Nest and Amazon Echo provide smart home automation, including voice-activated music playback. They can control music in various rooms and offer smart integrations with other appliances. However, users need to manually control playback across different speakers, and the sound doesn’t seamlessly follow the user. }
 
 \
-\subsubsection{Suno: Suno is a generative AI company that specializes in music creation. The platform allows users to generate original songs, complete with melodies and harmonies, by providing simple text prompts or lyrics.}
 \
-
 \subsubsection{Melobytes: Melobytes is one tool where users can upload an image, and the system generates music from it using algorithms tailored to the visual data. It transforms the picture into unique sound compositions that reflect the visual input.}
 \
 
@@ -146,7 +143,9 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 \
 
 \subsubsection{GoEnhance AI: This platform allows users to upload an image, and its AI algorithms automatically generate a text prompt based on the visual content. These prompts can be used with tools like DALL-E or Midjourney to generate new AI-created images based on the original photo's characteristics.}
+\
 
+\subsubsection{Sonos (Multi-Room Audio Systems): Sonos is a leading brand in multi-room audio systems. Sonos allows users to control au     dio in various rooms through a smartphone app, letting users sync music in different areas of the house. However, unlike LG Follow, Sonos requires manual control for changing rooms or selecting where to play audio. It does not automatically follow the user based on their movement.}
 \
 
 \
@@ -190,7 +189,7 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 
 \subsubsection{Prompt Generation}
 \begin{itemize}
-    \item Feature Extraction with CLIP: The Flask server utilizes the CLIP (Contrastive Language–Image Pretraining) model to analyze the uploaded image. This model, developed to understand visual and textual information, extracts essential features from the image and converts them into vector form. These feature vectors capture the key visual attributes and characteristics of the image, enabling the next model to generate contextually accurate prompts.\\
+    \item Feature Extraction with BLIP: The Flask server utilizes the BLIP (Bootstrapped Language-Image Pretraining) model to analyze the uploaded image. This model, designed to understand and generate meaningful associations between visual and textual data, extracts essential features from the image and encodes them into vector form. These feature vectors represent the key visual elements and attributes of the image, enabling the model to generate descriptive and contextually accurate prompts.\\
     \item Prompt Creation with BLIP: After extracting features, the Flask server leverages the BLIP (Bootstrapped Language-Image Pretraining) model to generate a text prompt in Korean based on the extracted vector data. The BLIP model has been trained on a substantial dataset containing over 120,000 image captions from ai-hub, equipping it with the capacity to generate descriptive, contextually appropriate prompts that align closely with the contents of the image. This thorough training ensures that the prompts are relevant, culturally suitable, and linguistically accurate.\\
     \item Prompt Length Limitation: To ensure readability and conciseness, the generated prompts are limited to a maximum of 300 characters. This character limit helps maintain clarity and avoids overwhelming the user with excessive text, while still providing sufficient detail to capture the essence of the image and guide the subsequent music generation process.\\
 \end{itemize}
@@ -204,9 +203,8 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 
 \subsection{Music Generation from Prompt }
 \begin{itemize}
-    \item Prompt Translation and Music Generation
+    \item Music Generation
 \begin{itemize}
-    \item Translation via Google Translation API: Since the prompts are generated in Korean, they are first translated into English using the Google Translation API. This translation occurs on the Flask server, which sends the translated prompt to the next processing step. The translation ensures compatibility with the SUNO API, which requires English input for optimal performance in generating music.\\
     \item Music Generation with SUNO API: After translation, the English prompt is sent to the SUNO API, a specialized service designed for AI-driven music generation. The SUNO API interprets the prompt context, creating a piece of music that aligns with the descriptive content of the prompt. This music reflects the theme and mood expressed in the original image-based prompt, transforming the visual input into an auditory experience.\\
 \end{itemize}
 \end{itemize}
@@ -341,8 +339,7 @@ Technical Features:
     \item Matter Bridge Integration: Acting as a Matter bridge, the Raspberry Pi operates as an integration point for interacting with Matter-supported devices. This enables other Matter-compatible devices to connect through the Raspberry Pi, ensuring smooth communication.\\
     \item Supports Various Languages: Raspberry Pi can be controlled using multiple programming languages such as Python, C++, and Java, offering developers a high degree of flexibility.\\
 \end{itemize}
-
-\clearpage
+    
 
 \subsubsection{Matter Protocol}
 \begin{figure}[h!]
@@ -542,31 +539,32 @@ Technical Features:
 \end{itemize}
 
 
-\subsubsection{React Native}
+\subsubsection{Flutter}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{image/ReactNative.png}
-    \caption{React Native}
+    \includegraphics[width=0.3\linewidth]{image/Flutter.png}
+    \caption{Flutter}
     \label{fig:enter-label}
 \end{figure}
 
-\noindent React Native is a popular cross-platform framework that allows developers to create apps that work on both iOS and Android from a single codebase, significantly reducing development time and costs. By using JavaScript, a widely-known language, React Native offers accessibility for developers, along with extensive community support and a rich ecosystem of libraries and tools.\\
+\noindent Flutter is an open-source UI toolkit developed by Google, allowing developers to create natively compiled applications for mobile, web, and desktop from a single codebase. It is known for its expressive UI, fast development cycles, and ability to create visually appealing applications. By using Dart, a language optimized for building mobile applications, Flutter offers a seamless and efficient development experience with extensive community support and a rich library of widgets.\\
 
 Role:
 \begin{itemize}
-    \item Cross-platform Development: React Native enables the development of applications that operate seamlessly across iOS and Android, simplifying access for users on both platforms.\\
-    \item Optimized Performance for Unique Services: Chosen for its ability to deliver optimized performance and a smooth user experience, React Native supports the app’s functionalities, including user tracking, sound playback, and song creation from user-drawn images.\\
-    \item Component-based Structure: With its component-based structure, React Native enhances code reusability and organization, making the code easier to manage and maintain.\\
-    \item UI and Logic Separation: React Native allows for the separation of UI components and business logic, increasing code readability and maintainability.\\
+    \item Cross-platform Development: Flutter provides a seamless way to create applications that work consistently across multiple platforms, including iOS, Android, web, and desktop, from one codebase. This greatly simplifies development and reduces costs.\\
+    \item Rich and Customizable UI Design: Flutter's widget-based framework allows developers to create highly customizable UIs with complex animations, ensuring a native-like experience and high performance for both simple and intricate designs.\\
+    \item Component-based Architecture: Flutter's widget-centric architecture encourages modular code that is easy to reuse, manage, and scale. Developers can create complex UIs by composing and nesting widgets.\\
+    \item Expressive Declarative UI: Flutter uses a declarative approach to building UIs, making the code more readable, intuitive, and responsive to changes in state.\\
 \end{itemize}
 
 Technical Features:
 \begin{itemize}
-    \item Cross-platform Capability: Allows development for both iOS and Android from a single codebase.\\
-    \item JavaScript Usage: Built with JavaScript, React Native is approachable and integrates well with various development tools.
-    \item Hot Reloading: Supports hot reloading, enabling rapid testing and iterative development.\\
-    \item Reusable and Maintainable Code: The component-based architecture improves reusability, organization, and maintainability, supporting long-term development.\\
+    \item Dart Language: Flutter leverages Dart, a powerful, easy-to-learn language optimized for mobile and desktop apps with strong performance and efficient memory management.\\
+    \item Extensive Widget Library: Flutter offers a vast collection of built-in widgets that are fully customizable, enabling developers to create UIs that conform to platform-specific designs or have a unique, custom look.
+    \item Hot Reloading: Allows developers to make changes to the code and see the results instantly without losing application state, enhancing productivity and speeding up development cycles.\\
+    \item Native Integration and Flexibility: Flutter allows seamless integration with platform-specific APIs and services, offering flexibility to access native features and deliver a native-like user experience.\\
+    \item IoT-related System Development: Flutter is well-suited for use alongside the latest technologies. Consider using Flutter when developing IoT (Internet of Things) solutions. It enables efficient integration of smart devices with user interfaces, facilitating the creation of high-performance IoT systems.
 \end{itemize}
 
 
@@ -752,7 +750,7 @@ Role:
 Technical Features:
 \begin{itemize}
     \item Drag-and-Drop Interface Builder: Simplifies UI design with visual placement and Auto Layout.\\
-    \item Comprehensive Preview Options: Preview and adjust for multiple devices and screen sizes.
+    \item Comprehensive Preview Options: Preview and adjust for multiple devices and screen sizes.\\
 \end{itemize}
 
 
@@ -784,6 +782,19 @@ Technical Features:
 
 
 \section{Specification}
+
+\subsection{Initial Screen}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/InitialScreen.png}
+    \caption{Initial Screen}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent When the user launches the app, the initial screen displays the 'LG Follow' logo and the 'Follow your Experience' tagline for 2–3 seconds. After a brief delay, the screen transitions smoothly to the login page.\\
+
+\clearpage
 
 \subsection{Log In}
 
@@ -896,6 +907,13 @@ Technical Features:
 \end{itemize}
 
 \subsection{Device Registration}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/QR0.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{image/QR.png}
@@ -936,12 +954,18 @@ Technical Features:
 
 \noindent User starts on the home screen and presses the menu button located on the bottom navigation bar, they open the menu page. From there, if the user navigates to the Life section and selects the Sound Sketch button, the app transitions to the Sound Sketch screen, providing them access to that feature. \\
 
+\subsection{Sound Sketch Initial Screen}
+
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\linewidth]{image/SoundSketch.png}
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch1.png}
     \caption{Enter Sound Sketch}
     \label{fig:enter-label}
 \end{figure}
+
+\noindent 
+When the user navigates to the menu page and selects the Sound Sketch button, the screen transitions smoothly to the Sound Sketch initial screen. The initial screen displays the 'Sound Sketch' logo at the center along with a clean design. After a brief moment, the screen transitions seamlessly to the main functionality of the Sound Sketch feature. \\
 
 \subsection{Sound Sketch Main Page}
 
@@ -1006,7 +1030,7 @@ Technical Features:
 \subsubsection{Canvas Section}
 \begin{itemize}
     \item The gray background area in the center of the screen serves as a canvas where users can draw freely. This section is dedicated to allowing users to create and edit their drawings.\\
-    \item Drawing Canvas: An interactive canvas where users can draw using various shapes, lines, and colors.\\
+    \item Drawing Canvas: An interactive canvas where users can draw using various lines and colors.\\
 \end{itemize}
 
 \subsubsection{Submit Button}
@@ -1038,39 +1062,43 @@ Technical Features:
     \item Home, ThinQ, LG Follow Tabs: The bottom navigation bar allows users to switch between the main sections of the app without losing their current work on the Sketch screen.\\
 \end{itemize}
 
-\subsection{Sound Control}
+
+\section{Architecture Design}
+
+\subsection{Overall Architecture}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.35\linewidth]{image/SoundSketch4.png}
-    \caption{Enter Caption}
+    \includegraphics[width=1\linewidth]{image/Arichitecture.png}
+    \caption{Overall Architecture}
     \label{fig:enter-label}
-    
-    
+\end{figure}
+ 
+
+\subsection{Directory Organization}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.1\linewidth]{image/Directory.png}
+    \caption{Directory Organization}
+    \label{fig:enter-label}
 \end{figure}
 
-\noindent When the Submit button is pressed on the Sketch page, the app navigates to the Sound control screen, where users can configure LG Follow settings for different appliances.
 
-\subsubsection{Appliance Icons}
-\begin{itemize}
-    \item  Each room in the displayed floor plan contains icons representing appliances equipped with the LG Follow feature.\\
-    \item Toggle LG Follow: Users can tap on any appliance icon to toggle the LG Follow function for that specific device.\\
-    \item On/Off Visuals
-\begin{itemize}
-    \item If the LG Follow function is On, the appliance icon is displayed in color, indicating active audio tracking for that room.\\
-    \item If the LG Follow function is Off, the icon appears in grayscale, indicating that audio tracking is disabled for that room.\\
-\end{itemize}
-\end{itemize}
-\begin{itemize}
-    \item Switching States: Tapping a colored (On) icon switches it to grayscale (Off), turning off the LG Follow function. Conversely, tapping a grayscale (Off) icon switches it to colored (On), enabling the LG Follow function.\\
-\end{itemize}
 
-\subsubsection{Set Up and Skip Buttons}
-\begin{itemize}
-    \item Set Up: Allows users to save their current LG Follow settings.\\
-    \item Skip: Bypasses LG Follow settings.\\
-    \item Pressing either Set Up or Skip will return the user to the Sound Sketch main page.\\
-\end{itemize}
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
+
+
+
