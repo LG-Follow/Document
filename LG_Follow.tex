@@ -3,6 +3,8 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{url}
+
 
 
 \ifCLASSINFOpdf
@@ -78,6 +80,8 @@ Backend Developer & Mingyu Jung & The backend developer would implement the logi
 \end{tabular}
 \end{table}
 
+\vspace{0.8cm}
+
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|p{3.5cm}|}
@@ -118,15 +122,15 @@ Our goal is to seamlessly blend creativity and technology, offering families a f
 \
 \subsection{Problem statement (client’s needs)}
 
-In today’s homes, AI speakers are commonly used to play music or news, but they are limited by their stationary nature. For someone who moves frequently between rooms during their morning routine—such as washing up in the bathroom, making coffee in the kitchen, or getting dressed in the bedroom—it becomes nearly impossible to catch all the audio from a single fixed speaker. This leads to a frustrating, interrupted experience where important parts of the audio are missed.
+In today’s homes, AI speakers are commonly used to play music or news, but they are limited by their stationary nature. For someone who moves frequently between rooms during their morning routine—such as washing up in the bathroom, making coffee in the kitchen, or getting dressed in the bedroom—it becomes nearly impossible to catch all the audio from a single fixed speaker. This leads to a frustrating, interrupted experience where important parts of the audio are missed.\\
 
-LG Follow solves this problem by allowing sound to follow the user throughout the house. As users move from room to room, LG appliances equipped with speakers provide continuous audio, eliminating gaps and ensuring they never miss a moment of music or news. This technology is designed to deliver a seamless and immersive audio experience, adapting to the user's movements to enhance their daily routine.
+LG Follow solves this problem by allowing sound to follow the user throughout the house. As users move from room to room, LG appliances equipped with speakers provide continuous audio, eliminating gaps and ensuring they never miss a moment of music or news. This technology is designed to deliver a seamless and immersive audio experience, adapting to the user's movements to enhance their daily routine.\\
 
-Additionally, we identified a need for families to engage creatively, leading to the development of Sound Sketch, an app that transforms children's drawings into personalized songs using generative AI. Children often express their imagination through drawings, and this feature elevates that creativity by turning their artwork into unique songs. It also offers parents and children the opportunity to bond through collaboration, creating memories as they hear their joint artwork come to life as music. By integrating LG Follow, these songs can follow the family throughout the house, adding a layer of joy and togetherness.
+Additionally, we identified a need for families to engage creatively, leading to the development of Sound Sketch, an app that transforms children's drawings into personalized songs using generative AI. Children often express their imagination through drawings, and this feature elevates that creativity by turning their artwork into unique songs. It also offers parents and children the opportunity to bond through collaboration, creating memories as they hear their joint artwork come to life as music. By integrating LG Follow, these songs can follow the family throughout the house, adding a layer of joy and togetherness.\\
 
-Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for ease of use, allowing users to control audio and manage drawings in one convenient place.  
+Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for ease of use, allowing users to control audio and manage drawings in one convenient place. \\
 
-\ 
+ 
 \subsection{Research on any related software}
 
 \subsubsection{Contrastive Language-Image Pre-training (CLIP): CLIP, developed by OpenAI, is a model trained on a large dataset of text and images to understand and associate visual and textual inputs. It enables users to perform tasks such as image search or classification using natural language prompts without task-specific fine-tuning, utilizing zero-shot capabilities. CLIP works by encoding images and text into a shared high-dimensional space where related pairs are closer together and unrelated pairs are further apart through a contrastive learning approach. While it demonstrates strong generalization capabilities, CLIP can exhibit biases present in its training data and may face challenges with nuanced or context-specific tasks.}
@@ -152,7 +156,7 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 
 \section{Requirements}
 
-\subsection{Log in}
+\subsection{Log In}
 
 \subsubsection{Initial Screen: When the app launches, the initial screen displayed to users is the login screen, providing access for existing users. This screen serves as the primary interface for user access, where users can input their credentials (ID and password) to authenticate.}
 
@@ -428,7 +432,7 @@ Technical Features:
 
 
 
-\subsection{Language \& Framwork}
+\subsection{Language \& Framework}
 
 \subsubsection{Spring Boot}
 
@@ -911,13 +915,13 @@ Technical Features:
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{image/QR0.png}
-    \caption{Caption}
+    \caption{Device Registration}
     \label{fig:enter-label}
 \end{figure}
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{image/QR.png}
-    \caption{Device Registration}
+    \caption{QR Scan}
     \label{fig:enter-label}
 \end{figure}
 
@@ -1073,16 +1077,542 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
     \caption{Overall Architecture}
     \label{fig:enter-label}
 \end{figure}
- 
 
-\subsection{Directory Organization}
+ \noindent The overall software architecture consists of three parts; frontend, backend and AI.\\
+
+ \subsubsection{Frontend}
+ \begin{itemize}
+     \item Framework: Flutter\\
+     \item Summary of features:
+\begin{itemize}
+    \item Provides a canvas screen that allows users to draw and send their drawings to the backend.\\
+    \item Offers toggle buttons to turn LG appliances' power and speakers On/Off.\\
+    \item Enables QR scanning to register LG appliances in the LG Follow app.\\
+    \item Provides a user interface to access previously created songs.\\
+    \item Displays an interface to view unfinished drawings.\\
+\end{itemize}
+ \end{itemize}
+
+ \subsubsection{Backend}
+\begin{itemize}
+    \item Web Framework: Spring Boot\\
+    \item Database: My SQL. RDS\\
+    \item Data storage: AWS S3\\
+    \item API: Suno API\\
+    \item Summary of features:
+\begin{itemize}
+    \item Generates songs based on prompts.\\
+    \item Stores user-drawn illustrations and the generated songs.\\
+    \item Allows temporary saving of drawings.\\
+    \item Enables registration of LG appliances.\\
+\end{itemize}
+\end{itemize}
+
+\subsubsection{AI}
+\begin{itemize}
+    \item Web Framework: Flask\\
+    \item AI Model: BLIP (Bootstrapping Language-Image Pre-training)\\
+    \item Summary of features: Extracts prompts from user-drawn illustrations.
+\end{itemize}
+
+
+\clearpage
+
+
+
+
+
+\subsection{Overall Directory Organization}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1.1\linewidth]{image/Directory.png}
+    \includegraphics[width=1\linewidth]{image/Directory.png}
     \caption{Directory Organization}
     \label{fig:enter-label}
 \end{figure}
+
+The LG Follow project consists of four GitHub repositories: Frontend, Backend, AI, and Document. Each repository plays a distinct role in the project’s architecture and development.\\
+
+The Frontend repository focuses on developing the user interface and application for LG Follow. It includes code and resources to support multiple platforms such as Android and iOS. The lib directory contains the core business logic and UI components of the frontend application. It handles essential functionalities such as screen navigation, state management, and user interactions. Additionally, assets like images are stored in the assets/images folder, while configuration and dependency management files, such as pubspec.yaml and analysis\_options.yaml, ensure efficient project maintenance.\\
+\
+
+The Backend repository is responsible for server-side logic in LG Follow. This repository includes all the necessary files to handle user requests, data processing, and other backend operations. The main implementation is located in the src directory, while Gradle build scripts (build.gradle, settings.gradle) and Docker configuration files (compose.yaml) support deployment and build automation.\\
+
+The AI repository is dedicated to developing and managing LG Follow’s artificial intelligence functionalities. It includes trained models (project\_directory/models/trained\_model), core scripts like main.py for executing AI processes, and train\_model.py for model training. Dependencies for AI tasks are managed through the requirement.txt file. Additionally, the configs and utils directories provide configuration files and utility scripts, ensuring a modular and well-structured AI system.\\
+
+The Document repository is responsible for managing the documentation of the LG Follow project. It includes the final project document in PDF format, LG\_Follow.pdf, and the LaTeX source file, LG\_Follow.tex, used to create it.\\
+
+\subsection{Module 1: Backend}
+
+\subsubsection{Purpose}
+\noindent To implement the backend, we used Spring Boot to build an application, streamlining the development process with its well-organized ecosystem and simple configuration. For database management, we adopted AWS RDS, which provided a centralized and scalable solution. This setup enabled the team to collaborate effectively and handle data efficiently throughout the project. The centralized database allowed shared access and simplified maintenance tasks, significantly improving overall productivity. Additionally, we integrated the MQTT protocol to facilitate real-time communication with Raspberry Pi. This implementation allowed for efficient data exchange and control between the backend and the device.\\
+
+\subsubsection{Functionality}
+\noindent The LG Follow server is responsible for executing tasks requested by users through the frontend, NUGU, and Raspberry Pi. It processes data and stores corresponding values in the database. When a user requests song creation, the server generates the song, saves it to the database, and delivers it to the frontend. Similarly, when a query request is made, the server utilizes the received values to provide the requested information. Additionally, the server manages IoT devices via MQTT communication, ensuring seamless device control and interaction.\\
+
+\subsubsection{Location of source code: }
+\url{https://github.com/LG-Follow/Back_End}\\
+
+\clearpage
+
+
+\begin{table}[h!]
+\caption{Backend Directory Organization}
+\def\arraystretch{1.4} \small
+    \begin{tabular}{|p{4.1cm}|p{4.1cm}|}
+        \hline
+        \textbf{Directory} & \textbf{File Name} \\ \hline
+        Root & .gitattributes \par .gitignore 
+        \par build.gradle
+        \par compose.yaml
+        \par gradlew \par gradlew.bat \par settings.gradle\\ \hline
+        gradle/wrapper& gradle-wrapper.jar \par gradle-wrapper.properties\\ \hline
+        src/main/java/com/example  \par /lgfollow\_server & LgFollowServer\par Application.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/component & MqttMessageListener.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/config & KafkaConsumerConfig.java \par KafkaProducerConfig.java \par MqttConfig.java \par RestConfig.java \par S3Config.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/controller & ImageController.java \par SongController.java \par UserDeviceController.java \par UsersController.java \\ \hline
+        src/main/java/com/example\par /lgfollow\_server/dto & ImageSendDto.java \par PromptGetDto.java \par SongDto.java \par SunoApiResponse.java \par UserDto.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/gateway & MqttGateway.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/model & Device.java \par Image.java \par Prompt.java \par Song.java \par SongRequest.java \par UserDevice.java \par UserDeviceId.java \par Users.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/repository & ImageRepository.java \par PromptRepository.java \par SongRepository.java \par UserDeviceRepository.java \par UsersRepository.java \\ \hline
+        src/main/java/com/example\par /lgfollow\_server/security & SecurityConfig.java \par WebConfig.java \\ \hline
+        src/main/java/com/example \par /lgfollow\_server/service & ImageService.java \par MqttPublisherService.java \par SongSendService.java \par SongService.java \par UserDeviceService.java \par UsersService.java \\ \hline
+        src/main/resources & application.properties \par application.yml \\ \hline
+        src/test/java/com/example \par /lgfollow\_server & LgFollowServer\par ApplicationTests.java \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Class component}
+
+\begin{itemize}
+    \item LgFollowServerApplication.java: This is a file for Spring Boot Application entrypoint. \\
+    \item lgfollow\_server/component: This package contains components that handle reusable logic.
+    \begin{itemize}
+        \item MqttMessageListener.java: A component that listens for incoming MQTT messages and processes them. \\
+    \end{itemize}
+    \item lgfollow\_server/config: This package contains configurations for external systems and application settings.
+    \begin{itemize}
+        \item KafkaConsumerConfig.java: Configuration for Kafka consumers, defining properties for consuming messages from Kafka topics. \\
+        \item KafkaProducerConfig.java: Configuration for Kafka producers, specifying properties for sending messages to Kafka topics. \\
+        \item MqttConfig.java: Configuration for connecting to the MQTT broker, including client settings and connection parameters. \\
+        \item RestConfig.java: Configuration for REST API clients, including base URLs and request/response customization. \\
+        \item S3Config.java: Configuration for connecting to AWS S3, including bucket names, credentials, and storage options. \\
+    \end{itemize}
+    \item lgfollow\_server/controller: This package contains controllers that manage API endpoints for handling user requests.
+    \begin{itemize}
+        \item ImageController.java: Handles API endpoints related to image upload, retrieval, and processing. \\
+        \item SongController.java: Manages API requests for song creation, storage, and retrieval. \\
+        \item UserDeviceController.java: Handles device-related actions, such as registration, updates, and communication. \\
+        \item UsersController.java: Manages user-related endpoints for profile management and data access. \\
+    \end{itemize}
+    \item lgfollow\_server/dto: This package contains Data Transfer Objects (DTOs) for exchanging structured data between layers.
+    \begin{itemize}
+        \item ImageSendDto.java: Data Transfer Object (DTO) for sending image-related data between layers. \\
+        \item PromptGetDto.java: DTO for receiving prompt-related data. \\
+        \item SunoApiResponse.java: DTO representing the response structure from external Suno API. \\
+        \item UserDto.java: DTO for transferring user data, such as authentication or profile information.
+    \end{itemize}
+    \item lgfollow\_server/gateway : This package contains gateway interfaces for external communication.
+    \begin{itemize}
+        \item MqttGateway.java: A gateway interface for sending messages through the MQTT broker. \\
+    \end{itemize}
+    \item lgfollow\_server/model: This package contains entity classes that represent the database structure and application models.
+    \begin{itemize}
+        \item Device.java: Entity representing a device registered by a user, including its attributes. \\
+        \item Image.java: Entity representing images uploaded in the application. \\
+        \item Prompt.java: Entity for storing prompts submitted by users for various images. \\
+        \item Song.java: Entity for storing metadata and content related to songs created or retrieved. \\
+        \item SongRequest.java: Entity representing a user's request for song creation. \\
+        \item UserDevice.java: Entity representing the relationship between users and their devices. \\
+        \item UserDeviceId.java: Composite key entity for UserDevice relationships. \\
+        \item Users.java: Entity for storing user information, such as credentials and profile data. \\
+    \end{itemize}
+    \item lgfollow\_server/repository : This package contains repository interfaces for interacting with the database.
+    \begin{itemize}
+        \item ImageRepository.java: Repository interface for database operations related to Image entities. \\
+        \item PromptRepository.java: Repository interface for database operations related to Prompt entities. \\
+        \item SongRepository.java: Repository interface for CRUD operations related to Song entities. \\
+        \item UserDeviceRepository.java: Repository interface for managing UserDevice relationships in the database. \\
+        \item UsersRepository.java: Repository interface for managing Users entities and user-related database operations. \\
+    \end{itemize}
+    \item lgfollow\_server/security: This package contains security configurations for authentication, authorization, and endpoint access control.
+    \begin{itemize}
+        \item SecurityConfig.java: Configuration for securing the application, including authentication, authorization, and endpoint access. \\
+        \item WebConfig.java: Configuration for web-related settings, such as CORS policies and request/response customizations. \\
+    \end{itemize}
+    \item lgfollow\_server/service: This package contains business logic and services for the application.
+    \begin{itemize}
+        \item ImageService.java: Service for handling image-related logic, such as upload, processing, and retrieval. \\
+        \item MqttPublisherService.java: Service for publishing messages to the MQTT broker. \\
+        \item SongSendService.java: Service for sending song-related data to external APIs or systems. \\
+        \item SongService.java: Service for managing songs, including creation, retrieval, and updates. \\
+        \item UserDeviceService.java: Service for managing user-device relationships, including registration and communication. \\
+        \item UsersService.java: Service for managing user-related logic, such as authentication, profile updates, and data access. \\
+    \end{itemize}
+\end{itemize}
+
+\clearpage
+
+\subsection{Module 2: AI}
+
+\subsubsection{Purpose}
+\noindent Our team has developed a multimodal deep learning model based on the BLIP architecture to generate prompts from images. BLIP is a model that connects images and text, making it possible to create descriptive and meaningful prompts from images. To enhance the accuracy of BLIP and produce richer prompts, we fine-tuned the model using the Flickr30k dataset via the Hugging Face framework. Flickr30k is a comprehensive dataset containing everyday images with detailed annotations. This fine-tuning process has improved the model's ability to interpret and describe various types of visual input, including real-world images and hand-drawn illustrations.\\
+
+\subsubsection{Fuctionality}
+\noindent The model takes an input image and generates a descriptive prompt based on its visual features. This functionality allows the user to easily extract meaningful textual descriptions from various types of images, such as real-world photos or hand-drawn sketches. The model was trained using the Flickr30k dataset, enabling it to recognize and describe a wide range of visual elements effectively.\\
+
+\
+
+\subsubsection{Location of source code:}
+\url{https://github.com/LG-Follow/AI}\\
+
+\begin{table}[h!]
+\caption{AI Directory Organization}
+\def\arraystretch{1.4} \small
+    \begin{tabular}{|p{4.1cm}|p{4.1cm}|}
+        \hline
+        Directory & File Name \\ \hline
+        Root & .gitignore \par README.md \par requirement.txt
+        \par train\_model.py \par main.py\\ \hline
+        configs & blip\_config.json \par \\ \hline
+        project\_directory/models \par /trained\_model & config.json \par generation\_config.json \par preprocessor\_config.json \par special\_tokens\_map.json \par tokenizer.json \par tokenizer\_config.json \par vocab.txt \\ \hline
+        utils/\_\_pycache\_\_ & blip\_prompting.cpython-312.pyc \par blip\_training.cpython-312.pyc \par blip\_utils.cpython-312.pyc \par collate.cpython-312.pyc \par data\_processing.cpython-312.pyc \\ \hline
+        utils & blip\_prompting.py \par blip\_training.py \par collate.py \par data\_processing.py \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Class component}
+\begin{itemize}
+    \item main.py: The main entry point of the project. \\
+    \item train\_model.py: Script for training the BLIP model using provided configurations and datasets. \\
+    \item configs: This is a directory for configuration of BLIP model training.
+    \begin{itemize}
+        \item blip\_config.json: Contains epoch number, architecture settings, and training configurations for BLIP. \\
+    \end{itemize}
+    \item project\_directory/models/trained\_model: Directory containing the trained model and associated configuration files.
+    \begin{itemize}
+        \item config.json: Metadata about the model, including architecture and dataset details. \\
+        \item generation\_config.json: Settings for generating outputs. \\
+        \item preprocessor\_config.json: Configuration for preprocessing images and input data for compatibility with the model. \\
+    \end{itemize}
+    \item utils: A directory for utility scripts used during training, preprocessing, and inference.
+    \begin{itemize}
+        \item blip\_prompting.py: Script for generating prompts from images using the BLIP model. \\
+        \item blip\_training.py: Script for handling the BLIP model's training pipeline. \\
+        \item collate.py: Utility for batching and collating input data during training or inference. \\
+        \item data\_processing.py: Functions for processing and augmenting datasets for model training. \\
+    \end{itemize}
+\end{itemize}
+
+\clearpage
+
+\subsection{Module 3: Frontend}
+
+\subsubsection{Purpose}
+\noindent The Frontend leverages the Flutter framework to provide an interface that supports user interactions. This allows users to control devices, view generated content, and process data visually. It focuses on enhancing the user experience by transmitting user inputs (e.g., drawings, settings) to the backend and visually presenting the processed data returned from the backend.\\
+
+\subsubsection{Functionality}
+\noindent Users can draw on a canvas screen and send their drawings to the backend. Additionally, it offers toggle buttons to turn LG appliances' power and speakers On/Off. The application also allows users to register LG appliances in the LG Follow app via QR code scanning. Furthermore, it provides a user interface to access previously created songs and a screen to view unfinished drawings.\\
+
+\subsubsection{Location of source code:}
+\url{https://github.com/LG-Follow/Front-End}\\
+
+\subsubsection{MVVM pattern (Model, View, ViewModel)}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/Frontend.png}
+    \caption{lib Directory Organization}
+    \label{fig:enter-label}
+\end{figure}
+\noindent The View delivers user input to the ViewModel, which then processes the data or requests further information from the Model based on the input. Subsequently, the View subscribes to the ViewModel using tools like Providers, Streams, or state management techniques and updates the display to reflect the updated data state.\\
+
+\begin{itemize}
+    \item Advantages of MVVM Pattern
+\begin{itemize}
+    \item Separation of Concerns: The application is divided into distinct areas: View, ViewModel, and Model, each with specific responsibilities. This separation significantly reduces the complexity of the program.\\
+    \item Ease of Testing: The clear interface between the View and ViewModel makes it easier to independently test the logic and functionality of the ViewModel.\\
+    \item Structured Project Organization: The MVVM pattern organizes the application into three components: View, ViewModel, and Model, which can be developed and managed independently. This structure improves maintainability and collaboration efficiency.\\
+    \item Parallel Development of UI: The separation of View and ViewModel enables simultaneous development of the UI and the ViewModel’s logic, enhancing team productivity.\\
+    \item Abstraction of View: The View does not directly handle data but communicates with the ViewModel to send and receive data. The ViewModel serves as an intermediary between the UI and the business logic, reducing the coupling between them and improving maintainability.\\  
+\end{itemize}
+\end{itemize}
+
+\begin{table}[h!]
+\caption{Frontend Directory Organization}
+\def\arraystretch{1.4} \small
+\begin{tabular}{|p{4.1cm}|p{4.1cm}|}
+    \hline
+    Directory & File Name \\ \hline
+    Root & .gitignore \par .metadata \par README.md \par analysis\_options.yaml \par pubspec.lock \par pubspec.yaml\\ \hline
+    android & .gitignore \par build.gradle \par gradle.properties \par settings.gradle \\ \hline
+    android/app & build.gradle \\ \hline
+    android/app/src/debug & AndroidManifest.xml \\ \hline
+    android/app/src/main & AndroidManifest.xml \par MainActivity.kt \\ \hline
+    android/app/src/main/res \par /drawable-v21 & launch\_background.xml \\ \hline
+    android/app/src/main/res \par /drawable & launch\_background.xml \\ \hline
+    android/app/src/main/res/mipmap-hdpi & ic\_launcher.png \\ \hline
+    android/app/src/main/res/mipmap-mdpi & ic\_launcher.png \\ \hline
+    android/app/src/main/res/mipmap-xhdpi & ic\_launcher.png \\ \hline
+    android/app/src/main/res/mipmap-xxhdpi & ic\_launcher.png \\ \hline
+    android/app/src/main/res/mipmap-xxxhdpi & ic\_launcher.png \\ \hline
+    android/app/src/main/res/values-night & styles.xml \\ \hline
+    android/app/src/main/res/values & styles.xml \\ \hline
+    android/app/src/profile & AndroidManifest.xml \\ \hline
+    assets/images & Follow.png \par Follow\_logo.png \par SoundSketch.png \par ai\_fit.png \par aircon.png \par dryer.png \par energy.png \par finger 1.png \par finger 2.png \par finger.png \par lg\_follow\_logo.png \par lg\_logo.png \par off.png \par on.png \par our\_apt.png \par ref.png \par robot.png \par sound.png \par sound\_sketch\_logo.png \par speaker.png \par tv.png \par washing.png \\ \hline
+    ios & .gitignore \par Podfile \par Podfile.lock \\ \hline
+    ios/Flutter & AppFrameworkInfo.plist \par Debug.xcconfig \par Release.xcconfig \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\caption{Frontend Directory Organization}
+\def\arraystretch{1.4} \small
+\begin{tabular}{|p{4.1cm}|p{4.1cm}|}
+    \hline
+    Directory & File Name \\ \hline
+    ios/Runner & AppDelegate.swift \par Info.plist \par Runner-Bridging-Header.h \\ \hline
+    ios/Runner/Assets.xcassets \par /AppIcon.appiconset & Contents.json \par Icon-App-1024x1024@1x.png \par Icon-App-20x20@1x.png \par Icon-App-20x20@2x.png \par Icon-App-20x20@3x.png \par Icon-App-29x29@1x.png \par Icon-App-29x29@2x.png \par Icon-App-29x29@3x.png \par Icon-App-40x40@1x.png \par Icon-App-40x40@2x.png \par Icon-App-40x40@3x.png \par Icon-App-60x60@2x.png \par Icon-App-60x60@3x.png \par Icon-App-76x76@1x.png \par Icon-App-76x76@2x.png \par Icon-App-83.5x83.5@2x.png \\ \hline
+    ios/Runner/Assets.xcassets \par /LaunchImage.imageset & Contents.json \par LaunchImage.png \par LaunchImage@2x.png \par LaunchImage@3x.png \par README.md \\ \hline
+    lib & main.dart \\ \hline
+    lib/model & Drawing.dart \par Login.dart \par Point.dart \par Temp.dart \par device.dart \par drawing\_painter.dart \par home.dart \par menu.dart \par product.dart \par sketch\_home.dart \par song.dart \\ \hline
+    lib/view & Drawing\_view.dart \par Follow\_view.dart \par Login\_view.dart \par Sound.dart \par Temp\_view.dart \par home\_view.dart \par menu\_view.dart \par product\_view.dart \par qr\_scan\_view.dart \par sketch\_home\_view.dart \par song\_list\_view.dart \\ \hline
+    lib/viewModel & Drawing\_view\_model.dart \par Login\_view\_model.dart \par Temp\_view\_model.dart \par home\_view\_model.dart \par menu\_view\_model.dart \par product\_view\_model.dart \par qr\_scan\_view\_model.dart \par sketch\_home\_view\_model.dart \par song\_view\_model.dart \\ \hline
+    linux & .gitignore \par CMakeLists.txt \\ \hline
+    linux/flutter & CMakeLists.txt \par generated\_plugin\_registrant.cc \par generated\_plugin\_registrant.h \par generated\_plugins.cmake \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
+
+\begin{table}[h!]
+\caption{Frontend Directory Organization}
+\def\arraystretch{1.4} \small
+\begin{tabular}{|p{4.1cm}|p{4.1cm}|}
+    \hline
+    Directory & File Name \\ \hline
+    macos & .gitignore \par Podfile \\ \hline
+    macos/Flutter & Flutter-Debug.xcconfig \par Flutter-Release.xcconfig \par GeneratedPluginRegistrant.swift \\ \hline
+    macos/Runner & AppDelegate.swift \par Info.plist \\ \hline
+    macos/Runner/Assets.xcassets \par /AppIcon.appiconset & Contents.json \par app\_icon\_1024.png \par app\_icon\_128.png \par app\_icon\_16.png \par app\_icon\_256.png \par app\_icon\_32.png \par app\_icon\_512.png \par app\_icon\_64.png \\ \hline
+    pubspec & pubspec.lock \par pubspec.yaml \\ \hline
+    test & widget\_test.dart \\ \hline
+    web & favicon.png \par index.html \par manifest.json \\ \hline
+    web/icons & Icon-192.png \par Icon-512.png \par Icon-maskable-192.png \par Icon-maskable-512.png \\ \hline
+    windows & .gitignore \par CMakeLists.txt \\ \hline
+    windows/flutter & CMakeLists.txt \par generated\_plugin\_registrant.cc \par generated\_plugin\_registrant.h \par generated\_plugins.cmake \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Class component}
+\begin{itemize}
+    \item .metadata: Contains project metadata. \\
+    \item analysis\_options.yaml: Configuration for static code analysis. \\
+
+    \item android: Contains Android-specific files and configurations.
+    \begin{itemize}
+        \item .gitignore: Specifies ignored files in the Android directory. \\
+        \item build.gradle: Defines the Android project’s build configurations. \\
+        \item gradle.properties: Configuration properties for Gradle. \\
+        \item gradle-wrapper.properties: Gradle wrapper configuration file. \\
+        \item settings.gradle: Settings for the Android project. \\
+        \item src/debug/AndroidManifest.xml: Android manifest for the debug build. \\
+        \item src/main/AndroidManifest.xml: Main Android manifest defining app configurations. \\
+        \item src/main/kotlin/com/example/lg\_follow/MainActivity.kt: Entry point for the Android app. \\
+        \item src/main/res/drawable-v21/launch\_background.xml: Background for the launch screen for API level 21+. \\
+        \item src/main/res/drawable/launch\_background.xml: Background for the launch screen for older APIs. \\
+        \item src/main/res/mipmap-\*/ic\_launcher.png: Launcher icons in different resolutions. \\
+        \item src/main/res/values-night/styles.xml: Styles for night mode. \\
+        \item src/main/res/values/styles.xml: Default styles for the app. \\
+    \end{itemize}
+
+    \item assets/images: Contains image assets used in the application.
+    \begin{itemize}
+        \item Follow.png, Follow\_logo.png: Images for branding and follow features.\\
+        \item SoundSketch.png, ai\_fit.png, aircon.png, dryer.png, etc.: Miscellaneous assets representing app features or functionalities. \\
+    \end{itemize}
+
+    \item ios: Contains iOS-specific files and configurations.
+    \begin{itemize}
+        \item .gitignore: Specifies ignored files in the iOS directory. \\
+        \item Flutter/AppFrameworkInfo.plist: Info for the Flutter framework. \\
+        \item Flutter/Debug.xcconfig, Release.xcconfig: Debug and release configurations. \\
+        \item Podfile, Podfile.lock: CocoaPods dependencies and lock file. \\
+        \item Runner.xcodeproj: Xcode project file for the iOS app. \\
+        \item Runner/AppDelegate.swift: Entry point for the iOS app. \\
+        \item Runner/Assets.xcassets: Contains app icons and launch images. \\
+        \item Runner/Base.lproj: Contains storyboard files for iOS UI. \\
+    \end{itemize}
+
+    \item lib: Contains the main Dart code for the application, including business logic, UI, and state management.
+    \begin{itemize}
+        \item model: Contains data models representing the app's structure and behavior.
+        \begin{itemize}
+            \item Drawing.dart: Represents a drawing model, including rendering and storage details. \\
+            \item Login.dart: Handles user login data. \\
+            \item Point.dart: A data model for coordinates or positions. \\
+            \item device.dart: Represents connected devices. \\
+            \item drawing\_painter.dart: Utility for managing drawings. \\
+            \item home.dart: Structure for the home screen's data model. \\
+            \item menu.dart: Represents menu configurations. \\
+            \item product.dart: A data structure that represents home appliances information. \\
+            \item sketch\_home.dart: Model for sketching features on the home screen. \\
+            \item song.dart: Represents song-related metadata. \\
+        \end{itemize}
+
+        \item view: Contains UI components and widgets.
+        \begin{itemize}
+            \item Drawing\_view.dart: UI for user drawings. \\
+            \item Follow\_view.dart: Loading screen. \\
+            \item Login\_view.dart: UI for the login page. \\
+            \item Sound.dart: Loading screen.\\
+            \item home\_view.dart: UI for the home screen. \\
+            \item menu\_view.dart: User interface for the menu. \\
+            \item product\_view.dart: List of home appliances that can be registered in the LG Follow app. 
+            \item qr\_scan\_view.dart: Interface for QR code scanning. \\
+            \item sketch\_home\_view.dart: UI for Sound Sketch home. \\
+            \item song\_list\_view.dart: Lists and manages songs. \\
+        \end{itemize}
+
+        \item viewModel: Contains state management and logic.
+        \begin{itemize}
+            \item Drawing\_view\_model.dart: Manages drawings and updates the view. \\
+            \item Login\_view\_model.dart: Handles login logic. \\
+            \item home\_view\_model.dart: Manages home screen data and interactions. \\
+            \item menu\_view\_model.dart: Handles menu settings and data. \\
+            \item product\_view\_model.dart:Implementation of home appliances data management and search functionality. \\
+            \item qr\_scan\_view\_model.dart: Processes QR code scans. \\
+            \item sketch\_home\_view\_model.dart: State management for sketch-related views. \\
+            \item song\_view\_model.dart: Handles song-related logic. \\
+        \end{itemize}
+    \end{itemize}
+
+    \item linux: Contains Linux-specific files and configurations.
+    \begin{itemize}
+        \item CMakeLists.txt: Build system configurations for Linux. \\
+        \item flutter: Contains files for integrating Flutter with Linux. \\
+    \end{itemize}
+
+    \item macos: Contains macOS-specific files and configurations.
+    \begin{itemize}
+        \item .gitignore: Specifies ignored files in the macOS directory. \\
+        \item Flutter: Contains macOS-specific Flutter configurations. \\
+        \item Runner: Contains app-specific files, such as Info.plist and app icons. \\
+    \end{itemize}
+
+    \item pubspec.yaml: Lists dependencies and assets for the project. \\
+    \item test: Contains unit tests for the application. \\
+    \item web: Contains web-specific files for deploying the app as a web application. \\
+    \item windows: Contains Windows-specific files and configurations. \\
+\end{itemize}
+
+\section{Use Case}
+
+\subsection{Initial Screen}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/InitialScreen.png}
+    \caption{Initial Screen}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The LG Follow Loading Page briefly appears when users turn on the application. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
+
+
+\subsection{Log in}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Login.png}
+    \caption{Log In}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Login Page is a page which allows users to log in by entering their id and password.\\
+
+
+\subsection{Main Page}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Main.png}
+    \caption{Main Page}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The Main Page is where users can view registered devices or register new ones using a QR code. In the center of the page, users can toggle the speaker functionality on or off for each registered device using the button next to it. Below the last listed device, the Add Appliance button enables users to scan a QR code to register a new device. The bottom navigation bar offers options to return to the Main Page or navigate to the Menu Page.\\
+
+\clearpage
+
+\subsection{Device Registration}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/QR0.png}
+    \caption{Divice Registration}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/QR.png}
+    \caption{QR Scan}
+    \label{fig:enter-label}
+\end{figure}
+\noindent Users can tap the "Add Appliance" button to scan QR codes using their smartphone's camera. By scanning a QR code, users can register their home appliances to the application.\\
+
+\vspace{3cm}
+
+\subsection{Menu Page}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Menu.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Users can navigate to the menu page by tapping the menu button on the right side of the bottom navigator. At the center of the menu page, there is a "Sound Sketch" button.
+Users can click this button to access the Sound Sketch service. The menu page also allows users to return to the home page using the bottom navigation bar.\\
+
+\clearpage
+
+\subsection{Sound Sketch Initial Screen}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch1.png}
+    \caption{Enter Sound Sketch}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The Sound Sketch Loading Page briefly appears when users click on Sound Sketch from the main page. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
+
+
+\subsection{Sound Sketch Main Page}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch2.png}
+    \caption{Sound Sketch Main Page }
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent The Sound Sketch main page is divided into three main sections. At the top, there is a Record button that allows users to navigate to a page displaying all the songs they have created so far, with the four most recently created songs displayed below for quick access. Dragging up the Drag Up to Start area at the bottom of the screen opens a drawing canvas where users can start creating. The Temporary Save section in the middle shows drawings that users paused earlier, allowing them to resume their work seamlessly.\\
+
+
+\subsection{Sketch Page}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/SoundSketch3.png}
+    \caption{Sketch Page}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent On the Sound Sketch Create Page, users can draw on the central canvas, selecting from a variety of brush thicknesses and colors to create their artwork. The Delete button at the top lets users erase their current drawing, and the Submit button to its right enables them to generate music from their drawing.\\
+
+
+
+
+
+
+
 
 
 
