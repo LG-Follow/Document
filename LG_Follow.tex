@@ -53,13 +53,13 @@ alsrms0206@hanyang.ac.kr
 
 
 \begin{abstract}
-    Imagine an office worker getting ready for work in the morning, listening to music or the news through an AI speaker. During the morning routine, they might wash up in the bathroom, make coffee in the kitchen, have breakfast, choose clothes from the closet, and get dressed. For someone who moves between rooms so frequently, it's almost impossible to catch 100\% of the audio output from a stationary AI speaker.
+    Imagine an office worker getting ready for work in the morning, listening to music or the news through an speaker. During the morning routine, they might wash up in the bathroom, make coffee in the kitchen, have breakfast, choose clothes from the closet, and get dressed. For someone who moves between rooms so frequently, it's almost impossible to catch 100\% of the audio output from a stationary speaker.
     
     We are introducing technology that called LG Follow allows sound to follow the user, creating an environment where they can hear audio in any part of the house with LG appliances equipped with speakers.
     
-    We will use a Raspberry Pi and PIR sensors to detect the user's location. The location information will be sent to a central control system, the AI speaker. For instance, if they leave the living room and enter the bedroom, the speaker in the living room will stop, and the speaker in the bedroom will automatically take over, seamlessly continuing the audio experience. Matter protocol manages the communication between Raspberry Pi and the AI speaker.
+    Using a Raspberry Pi and PIR sensors, the system detects the user's location and seamlessly transfers the sound to the area where the user is currently located. For instance, if they leave the living room and enter the bedroom, the speaker in the living room will stop, and the speaker in the bedroom will automatically take over, seamlessly continuing the audio experience. MQTT protocol manages the communication between Raspberry Pi and the speaker.
     
-    Additionally, we provide an app called Sound Sketch that turns children's drawings into songs using generative AI. When a child draws a picture, the AI will create a song based on their own music. Through generative AI, the drawings will be transformed into prompts, and those prompts will be turned into music. With LG Follow, kids can enjoy listening to their own music as they move around the house, making each moment truly unique and magical.
+    Additionally, we provide an app called Sound Sketch that turns children's drawings into songs using generative AI. When a child draws a picture, the Sound Sketch will create a song based on their own picture. Through a trained AI model, the drawings will be transformed into prompts, and those prompts will be turned into music. With LG Follow, kids can enjoy listening to their own music as they move around the house, making each moment truly unique and magical.
 
 \end{abstract}
 
@@ -74,7 +74,7 @@ alsrms0206@hanyang.ac.kr
 \hline
 \textbf{Roles} & \textbf{Name} & \textbf{Task description and etc.} \\
 \hline
-Backend Developer & Mingyu Jung & The backend developer would implement the logic to process location data from the Raspberry Pi and PIR sensors, ensuring the user’s movement through the house is accurately tracked and relayed to the AI speaker system. Ensure that when the user moves between rooms, the appropriate speaker is activated, and the previous one is turned off, all in real-time. Handle communication between the Raspberry Pi, PIR sensors, and AI speaker system using the Matter protocol, ensuring compatibility between the smart home appliances and devices. \\
+Backend Developer & Mingyu Jung & The backend developer would implement the logic to process location data from the Raspberry Pi and PIR sensors, ensuring the user’s movement through the house is accurately tracked and relayed to the speaker. Ensure that when the user moves between rooms, the appropriate speaker is activated, and the previous one is turned off, all in real-time. Handle communication between the Raspberry Pi, PIR sensors, and speaker using the Matter protocol, ensuring compatibility between the smart home appliances and devices. \\
 \hline
 
 \end{tabular}
@@ -92,7 +92,7 @@ Frontend Developer & Taegeon Park & The role of a frontend developer includes de
 \hline
 Backend Developer & Gyudong Kim & AI developer utilizes openai models CLIP and BLIP to generate prompts from input images. To ensure the safety of children, AI developers fine-tune the BLIP model so that inappropriate prompts are not created. Once the prompts are generated, AI developers use the Suno API to create songs from these prompts. Also AI developers are responsible for designing and building databases to store and manage various types of data, such as user information, home appliances, and the generated drawings and songs, ensuring efficient integration and management within the application. Implement a database to store user preferences, drawings, and song files generated by Sound Sketch. \\
 \hline
-Frontend Developer & Mingeun Kim & The frontend developer would design the interface for the ThinQ app, ensuring that both LG Follow and Sound Sketch are intuitive and user friendly. This includes creating buttons and layouts for turning speakers on/off and uploading drawings to generate songs. The developer will focus on helping LG Follow and Sound Sketch features, enabling users to control speakers in different rooms and upload or manage children's drawings in the app.  \\
+Frontend Developer & Mingeun Kim & The frontend developer would design the interface for the LG Follow app, ensuring that both LG Follow and Sound Sketch are intuitive and user friendly. This includes creating buttons and layouts for turning speakers on/off and uploading drawings to generate songs. The developer will focus on helping LG Follow and Sound Sketch features, enabling users to control speakers in different rooms and upload or manage children's drawings in the app.  \\
 \hline
 \end{tabular}
 \end{table}
@@ -114,26 +114,32 @@ Our goal is to seamlessly blend creativity and technology, offering families a f
 
 
 \
-\subsubsection{We’ve made LG Follow and Sound Sketch easy to use by integrating them into the ThinQ app, ensuring both features are conveniently controlled in one place. With LG Follow, users can easily turn off the speaker in any appliance if they don’t want sound in a specific room. Meanwhile, Sound Sketch lets you transform children's drawings into songs, bringing creativity to life in a fun way. Everything is accessible and simple to control from the app, making the entire experience smooth, personalized, and user-friendly.}
+\subsubsection{We've combined the LG Follow and Sound Sketch features into a single app, allowing users to experience both functionalities seamlessly in one place. With LG Follow, users can easily turn off the speaker in any appliance if they prefer not to have sound in a specific room. Meanwhile, Sound Sketch transforms children's drawings into songs, bringing their creativity to life in a fun and engaging way. The app ensures everything is accessible and simple to control, offering a smooth, personalized, and user-friendly experience.}
 
 
 \
 \
 \
-\subsection{Problem statement (client’s needs)}
+\subsection{Problem Statement (client’s needs)}
 
-In today’s homes, AI speakers are commonly used to play music or news, but they are limited by their stationary nature. For someone who moves frequently between rooms during their morning routine—such as washing up in the bathroom, making coffee in the kitchen, or getting dressed in the bedroom—it becomes nearly impossible to catch all the audio from a single fixed speaker. This leads to a frustrating, interrupted experience where important parts of the audio are missed.\\
+In today’s homes, speakers are commonly used to play music or news, but they are limited by their stationary nature. For someone who moves frequently between rooms during their morning routine—such as washing up in the bathroom, making coffee in the kitchen, or getting dressed in the bedroom—it becomes nearly impossible to catch all the audio from a single fixed speaker. This leads to a frustrating, interrupted experience where important parts of the audio are missed.\\
 
 LG Follow solves this problem by allowing sound to follow the user throughout the house. As users move from room to room, LG appliances equipped with speakers provide continuous audio, eliminating gaps and ensuring they never miss a moment of music or news. This technology is designed to deliver a seamless and immersive audio experience, adapting to the user's movements to enhance their daily routine.\\
 
 Additionally, we identified a need for families to engage creatively, leading to the development of Sound Sketch, an app that transforms children's drawings into personalized songs using generative AI. Children often express their imagination through drawings, and this feature elevates that creativity by turning their artwork into unique songs. It also offers parents and children the opportunity to bond through collaboration, creating memories as they hear their joint artwork come to life as music. By integrating LG Follow, these songs can follow the family throughout the house, adding a layer of joy and togetherness.\\
 
-Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for ease of use, allowing users to control audio and manage drawings in one convenient place. \\
+Both features, LG Follow and Sound Sketch, are integrated into the single app for ease of use, allowing users to control audio and manage drawings in one convenient place. \\
 
  
-\subsection{Research on any related software}
+\subsection{Research on Any Related Software}
 
 \subsubsection{Contrastive Language-Image Pre-training (CLIP): CLIP, developed by OpenAI, is a model trained on a large dataset of text and images to understand and associate visual and textual inputs. It enables users to perform tasks such as image search or classification using natural language prompts without task-specific fine-tuning, utilizing zero-shot capabilities. CLIP works by encoding images and text into a shared high-dimensional space where related pairs are closer together and unrelated pairs are further apart through a contrastive learning approach. While it demonstrates strong generalization capabilities, CLIP can exhibit biases present in its training data and may face challenges with nuanced or context-specific tasks.}
+
+\
+\subsubsection{Sonos (Multi-Room Speaker System): Sonos is a leading brand in multi-room audio systems. Sonos allows users to control audio in various rooms through a smartphone app, letting users sync music in different areas of the house. However, unlike LG Follow, Sonos requires manual control for changing rooms or selecting where to play audio. It does not automatically follow the user based on their movement.}
+
+\
+\subsubsection{NVIDIA Fugatto: NVIDIA Fugatto is an AI technology that generates audio from text prompts. By inputting a text description, Fugatto can create audio content that matches the provided prompt. For example, if you input "calm and serene morning," Fugatto will generate soft and peaceful music or nature sounds. Fugatto focuses on converting text into music, creating audio that matches the emotional tone or atmosphere described in the text.}
 \
 
 \subsubsection{Google Nest and Amazon Echo: Google Nest and Amazon Echo provide smart home automation, including voice-activated music playback. They can control music in various rooms and offer smart integrations with other appliances. However, users need to manually control playback across different speakers, and the sound doesn’t seamlessly follow the user. }
@@ -149,10 +155,9 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 \subsubsection{GoEnhance AI: This platform allows users to upload an image, and its AI algorithms automatically generate a text prompt based on the visual content. These prompts can be used with tools like DALL-E or Midjourney to generate new AI-created images based on the original photo's characteristics.}
 \
 
-\subsubsection{Sonos (Multi-Room Audio Systems): Sonos is a leading brand in multi-room audio systems. Sonos allows users to control au     dio in various rooms through a smartphone app, letting users sync music in different areas of the house. However, unlike LG Follow, Sonos requires manual control for changing rooms or selecting where to play audio. It does not automatically follow the user based on their movement.}
-\
 
 \
+
 
 \section{Requirements}
 
@@ -182,47 +187,67 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
     \end{itemize}
 \end{itemize}
 
-\subsection{Prompt Generation from Drawing }
 
-\subsubsection{Image Upload and Temporary Storage}
-\begin{itemize}
-    \item Redis-Based Temporary Storage: When a user uploads an image, it is temporarily stored in Redis to allow for fast access. This approach enables users to seamlessly pause and resume their creative work without losing any progress. Redis, being a memory-based cache database, ensures minimal latency and instant data retrieval, enhancing the user experience by providing a quick response time for accessing stored images.\\
-    \item Long-Term Storage in Amazon S3: For secure and persistent storage, the image is uploaded to Amazon S3, where it is safely preserved for future reference. S3’s bucket permissions are tightly controlled to restrict unauthorized external access, maintaining data security. The stored images are retained in S3 for extended availability, ensuring that they are accessible whenever the user requires them, without overloading the cache in Redis.\\
-\end{itemize}
-\
+\subsection{Fine-tuning the BLIP Model}
 
-\subsubsection{Prompt Generation}
+\subsubsection{Dataset Collection}
 \begin{itemize}
-    \item Feature Extraction with BLIP: The Flask server utilizes the BLIP (Bootstrapped Language-Image Pretraining) model to analyze the uploaded image. This model, designed to understand and generate meaningful associations between visual and textual data, extracts essential features from the image and encodes them into vector form. These feature vectors represent the key visual elements and attributes of the image, enabling the model to generate descriptive and contextually accurate prompts.\\
-    \item Prompt Creation with BLIP: After extracting features, the Flask server leverages the BLIP (Bootstrapped Language-Image Pretraining) model to generate a text prompt in Korean based on the extracted vector data. The BLIP model has been trained on a substantial dataset containing over 120,000 image captions from ai-hub, equipping it with the capacity to generate descriptive, contextually appropriate prompts that align closely with the contents of the image. This thorough training ensures that the prompts are relevant, culturally suitable, and linguistically accurate.\\
-    \item Prompt Length Limitation: To ensure readability and conciseness, the generated prompts are limited to a maximum of 300 characters. This character limit helps maintain clarity and avoids overwhelming the user with excessive text, while still providing sufficient detail to capture the essence of the image and guide the subsequent music generation process.\\
-\end{itemize}
-\
-
-\subsubsection{Prompt Data Storage}
-\begin{itemize}
-    \item Database Storage with Metadata: Once a prompt is generated, it is stored in a MySQL database along with associated metadata, including the music creation date, a description of the image, and other relevant details. Each prompt is assigned a unique identifier (prompt ID), allowing for easy retrieval and reference in future operations.\\
-    \item Integration with Music Description: The stored prompts are later used as part of the metadata for the music generated from them, particularly in the music’s description field. This integration ensures that the prompt remains linked to the music it inspired, providing context and enhancing the storytelling aspect of the user’s creation.\\
+    \item Utilize the Flickr30k dataset available on Hugging Face, which includes images paired with their corresponding captions. Download the dataset using the Hugging Face Datasets library and prepare it for training preprocessing.\\
 \end{itemize}
 
-\subsection{Music Generation from Prompt }
+\subsubsection{Data Processing}
 \begin{itemize}
-    \item Music Generation
-\begin{itemize}
-    \item Music Generation with SUNO API: After translation, the English prompt is sent to the SUNO API, a specialized service designed for AI-driven music generation. The SUNO API interprets the prompt context, creating a piece of music that aligns with the descriptive content of the prompt. This music reflects the theme and mood expressed in the original image-based prompt, transforming the visual input into an auditory experience.\\
+    \item Preprocess the dataset to ensure it works smoothly with the BLIP(Bootstrapped  Language-Image  Pretraining) model. Convert all inputs into a format the model can understand. Adjust text data so all sequences are the same length and create markers to identify real data versus padding. Standardize the image data format and organize captions into a list to prepare for training in batches.\\
 \end{itemize}
-\end{itemize}
+
+\subsubsection{Training Process}
 \begin{itemize}
-    \item Music Storage and Metadata Management
-\begin{itemize}
-    \item Storage in Amazon S3: The generated music file is uploaded to Amazon S3 via the Flask server. S3’s robust storage infrastructure ensures that the music files are securely stored and easily retrievable for streaming or download.\\
-    \item Metadata Management with Spring Boot and MySQL: Alongside the music file, metadata—such as the title, description, creation timestamp, and duration of the music track—is stored in a MySQL database managed by Spring Boot. This setup facilitates quick access to the music files and metadata, allowing the app to display information such as track duration and descriptions in real-time.\\
+    \item Initialize the BLIP model and processor. Use a DataLoader to batch the preprocessed data and train the model. Compute and backpropagate the loss for each batch, updating the model parameters. Save the trained model and processor after completing the specified number of epochs.\\
 \end{itemize}
-\item User Control
+
+\subsection{Prompt Generation from Image}
+
+\subsubsection{User Input}
 \begin{itemize}
-    \item Play Button: Within the app, users have the option to play the generated music in real-time. The music track’s duration is displayed in seconds, providing feedback on the playback progress.\\
-    \item Download Button: A download link is provided via the Spring Boot server, allowing users to download the music file directly from S3 for offline access. This feature ensures that users can access and enjoy their generated music files even without an internet connection.\\
+    \item After successful login, users can provide images through the app. These images can either be photos from their gallery or drawings created by the users.\\
 \end{itemize}
+
+\subsubsection{Image Storage}
+\begin{itemize}
+    \item The images are stored in Amazon S3, and a URL is retrieved. The URL is securely stored in the RDS along with information about the user who uploaded the image.\\
+\end{itemize}
+
+\subsubsection{Generating Prompt}
+\begin{itemize}
+    \item The backend server sends a request to the AI model's server to generate a prompt using the trained BLIP model. The generated prompt is stored in the RDS along with information about the image.\\
+\end{itemize}
+
+
+\subsection{Music Generation from Prompt}
+
+\subsubsection{Prompt Transfer}
+\begin{itemize}
+    \item The backend server sends the stored prompt to the Suno API, requesting the generation of basic music.\\
+\end{itemize}
+
+\subsubsection{Generating Music}
+\begin{itemize}
+    \item Suno API generates music using the provided prompt. It sends information about the generated music to the backend server. This information includes the music URL, playback duration, and creation date.\\
+\end{itemize}
+
+\subsubsection{Song Storage}
+\begin{itemize}
+    \item The backend server stores the received information in the RDS along with the prompt that was used to generate the music.\\
+\end{itemize}
+
+\subsubsection{View Music}
+\begin{itemize}
+    \item When a user requests to view music, backend server provides information about the music. This includes the music URL, the URL of the image that was used to generate the prompt, and the playback duration.\\
+\end{itemize}
+
+\subsubsection{Playing Music}
+\begin{itemize}
+    \item Users can play the generated music in real-time using the app. The duration of the music track is displayed in seconds.\\
 \end{itemize}
 
 
@@ -232,13 +257,6 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 \begin{itemize}
     \item Matter Bridge Configuration: The Raspberry Pi is configured as a Matter bridge, enabling it to act as an intermediary between Matter-compatible and non-compatible speakers. This configuration supports seamless communication across different types of audio devices, allowing them to function together as part of an integrated system. Users can register the Matter bridge by scanning a QR code, simplifying the setup process and ensuring secure connectivity.\\
     \item Expanding Device Compatibility: By serving as a Matter bridge, the Raspberry Pi can facilitate the synchronization of audio playback across a variety of speaker types, ensuring a consistent audio experience throughout the user’s environment, regardless of speaker compatibility.\\
-\end{itemize}
-\end{itemize}
-\begin{itemize}
-    \item Speaker Control and Audio Transition
-\begin{itemize}
-    \item Real-Time Audio Transition with Matter Protocol: The Raspberry Pi uses the Matter protocol to manage real-time audio transitions between AI-enabled speakers and traditional speakers. This protocol enables seamless transitions in audio playback as the user moves from one room to another, with the system dynamically adjusting which speakers are active based on the user’s location.\\
-    \item Seamless Multi-Speaker Coordination: The audio playback seamlessly switches between speakers, providing an uninterrupted listening experience as the user moves through different spaces. This coordination between AI speakers and non-Matter-compatible speakers ensures that the audio follows the user smoothly, enhancing the sense of spatial audio presence.\\
 \end{itemize}
 \end{itemize}
 
@@ -256,20 +274,41 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
     \item Automated Speaker Activation and Deactivation: As the user moves from one room to another, the Raspberry Pi sends commands via the Matter protocol to deactivate the speaker in the previous room and activate the speaker in the current room. This process ensures that audio playback continues in the room where the user is currently located, providing a consistent auditory experience as they move around their environment.\\
 \end{itemize}
 \end{itemize}
+\begin{itemize}
+    \item Speaker Control and Audio Transition
+\begin{itemize}
+    \item Real-Time Audio Transition with MQTT Protocol: The Raspberry Pi uses the Matter protocol to manage real-time audio transitions between speakers and speakers. This protocol enables seamless transitions in audio playback as the user moves from one room to another, with the system dynamically adjusting which speakers are active based on the user’s location.\\
+    \item Seamless Multi-Speaker Coordination: The audio playback seamlessly switches between speakers, providing an uninterrupted listening experience as the user moves through different spaces. This coordination between speakers and speakers ensures that the audio follows the user smoothly, enhancing the sense of spatial audio presence.\\
+\end{itemize}
+\end{itemize}
 
 \subsection{Location-Based Sound Transition}
+
+\subsubsection{Real-time Streaming with MQTT Protocol}
 \begin{itemize}
-    \item Real-time Streaming with RTP Protocol
+    \item MQTT Configuration for Each Room’s Speaker
 \begin{itemize}
-    \item RTP Configuration for Each Room’s Speaker: Each room’s speaker is configured to use the RTP (Real-time Transport Protocol) for audio streaming, enabling smooth transitions in sound. The Raspberry Pi manages these transitions based on the user’s location, seamlessly switching audio playback between rooms as the user moves.\\
-    \item Seamless Streaming: RTP enables real-time audio streaming with minimal delay, providing a continuous and smooth listening experience as the audio playback moves with the user from room to room.\\
+    \item  Each room’s speaker is configured to receive audio data via the MQTT (Message Queuing Telemetry Transport) protocol. As the user moves between rooms, the Raspberry Pi utilizes MQTT to seamlessly switch audio playback to the appropriate speaker based on the user’s location. The MQTT broker serves as the intermediary, ensuring smooth audio data transfer between speakers. Each speaker subscribes to specific topics, and as the user moves, the Raspberry Pi publishes the audio data to the relevant topic, enabling the transition of audio between rooms without interruption.\\
 \end{itemize}
 \end{itemize}
 \begin{itemize}
-    \item Audio Data Transfer
+    \item Seamless Streaming
 \begin{itemize}
-    \item Matter Protocol for Communication Management: The Matter protocol facilitates communication between the Raspberry Pi and the speakers. Meanwhile, RTP handles the actual data transfer, ensuring that the audio transitions smoothly between different speakers without interruption.\\
-    \item Enhanced Audio Experience: The combination of RTP and Matter protocols allows for fluid sound transitions, so the user experiences uninterrupted audio regardless of their movement within the environment.\\
+    \item MQTT, being a lightweight message protocol, is optimized for real-time data transmission, allowing audio to be delivered rapidly and reliably. As the user transitions from one room to another, the MQTT broker ensures that the audio data is routed to the correct speaker based on the user’s location. Using MQTT’s QoS (Quality of Service) levels, the protocol guarantees that data is delivered reliably, ensuring a continuous streaming experience without interruption.\\
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Audio Data Transfer}
+\begin{itemize}
+    \item Matter Protocol for Communication Management
+\begin{itemize}
+    \item The Matter protocol facilitates control and communication between the Raspberry Pi and the speakers. Matter works with the MQTT broker to manage the audio data transfer, ensuring each speaker receives the appropriate audio message based on the user's movement. The MQTT broker routes messages based on the subscribed topics, facilitating efficient communication between speakers.\\
+\end{itemize}
+\end{itemize}
+\begin{itemize}
+    \item Enhanced Audio Experience
+\begin{itemize}
+    \item With MQTT’s QoS features, audio data is transmitted reliably and without loss. The MQTT broker plays a central role in managing and propagating messages between speakers. As the user moves, the broker ensures that the audio stream is transitioned smoothly from one speaker to the next, delivering an uninterrupted listening experience.
 \end{itemize}
 \end{itemize}
 
@@ -289,30 +328,20 @@ Both features, LG Follow and Sound Sketch, are integrated into the ThinQ app for
 
 \subsection{Temporary Image Storage and Music CRUD}
 
-\subsubsection{Temporary Image Storage in Redis}
-\begin{itemize}
-    \item Flask-Managed Temporary Storage: The Flask server handles the temporary storage of user-uploaded images in Redis, enabling quick access and retrieval for paused or resumed drawing tasks. This temporary storage ensures that users can continue their creative work without interruption, even if they temporarily exit the app.\\
-    \item When a user saves a drawing temporarily, Redis, a fast-access cache database, is used to store the image data.\\
-    \item Redis acts as a memory-based storage solution that saves the temporary image data and allows for rapid retrieval when needed. This is particularly useful if the user pauses or edits the drawing, enabling them to resume their work later without data loss. \\
-    \item By utilizing Redis, the app ensures quick access to the saved image while reducing latency and enhancing user experience during the drawing process.\\
-\end{itemize}
-
-
 \subsubsection{Music CRUD}
 \begin{itemize}
-    \item Once the drawing is transmitted to the Flask server, the image is stored temporarily in Redis, a memory-based cache, which allows fast retrieval of the drawing. This enables the user to pause or resume work on the drawing.\\
-    \item The Flask server processes the request and ensures real-time streaming of the music, allowing users to listen to the song as soon as it's generated.\\
-    \item For storage and long-term management of the generated music, the metadata and music links are handled by Spring Boot, which communicates with a MySQL database to store information such as the song title, date of creation, and the associated drawing theme.\\
+    \item The Spring Boot server processes the request and ensures real-time streaming of the music, allowing users to listen to the song as soon as it's generated.\\
+    \item For storage and long-term management of the generated music, the metadata and music links are handled by Amazon RDS, which communicates with a MySQL database to store information such as the song title, date of creation.\\
     \item Users can perform CRUD operations on the generated music.
 \begin{itemize}
-    \item Create: Saving the generated music to the database and S3 for long-term access.\\
-    \item Read: Streaming the saved music from S3 and retrieving metadata from the database for display in the app.\\
+    \item Create: Saving the generated music to the Amazon RDS
+    \item Read: Streaming the saved music from RDS and retrieving metadata from the database for display in the app.\\
     \item Update: Modifying the song’s metadata or regenerating the music by submitting a new drawing.\\
-    \item Delete: Removing the music file from S3 and its metadata from the MySQL database, while ensuring Redis invalidates any cached data related to the deleted music.\\
+    \item Delete: Removing the music file from RDS and its metadata from the MySQL database.
 \end{itemize}
 \end{itemize}
 
-
+\clearpage
 
 \section{Development Environment}
 
@@ -393,7 +422,6 @@ Technical Features:
     \item Wide Detection Range: It generally provides a broad detection angle, allowing it to sense movement throughout an entire room.\\
 \end{itemize}
 
-\clearpage
 
 \subsection{Software Develepment Platform}
 
@@ -431,6 +459,9 @@ Technical Features:
 \noindent macOS, developed by Apple and based on UNIX, is widely recognized for its user-friendly interface and stability, making it a preferred operating system for developers, particularly in design, media, and software development environments. Its robust integration with Apple hardware ensures optimized performance and energy efficiency, which is essential for seamless application testing and development. macOS includes powerful command-line utilities and developer tools such as Xcode, which supports app development for the Apple ecosystem, including iOS, macOS, watchOS, and tvOS. Additionally, the macOS environment provides strong support for multi-tasking and multi-threading, and its UNIX-based architecture offers compatibility with various development frameworks and programming languages, making it highly adaptable to web, mobile, and cloud applications. macOS’s extensive developer community, combined with Apple’s regular updates, ensures high security standards, efficient troubleshooting, and consistent performance, making it an ideal choice for both individual developers and large-scale development teams. \\
 
 
+\subsubsection{MQTT Protocol}
+
+\noindent MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed primarily for IoT (Internet of Things) and M2M (Machine to Machine) communication. It is optimized for environments with limited bandwidth and unreliable networks, making it ideal for real-time data transmission between small devices and servers.\\
 
 \subsection{Language \& Framework}
 
@@ -496,7 +527,7 @@ Technical Features:
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\linewidth]{image/Python.png}
+    \includegraphics[width=0.9\linewidth]{image/Python.png}
     \caption{Python}
     \label{fig:enter-label}
 \end{figure}
@@ -591,6 +622,32 @@ Technical Features:
     \item Specialized Language Training: By training on datasets with images and Korean captions, BLIP can generate Korean prompts, making it suitable for localized applications and non-English language tasks.\\
     \item Enhanced Vision-Language Bridging: BLIP effectively integrates textual and visual data, enabling it to process and produce outputs that combine both modalities seamlessly.\\
 \end{itemize}
+
+\subsubsection{Suno API}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{image/Suno.png}
+    \caption{Suno API}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Suno API is an innovative AI model that enables the automatic generation of songs based on text prompts. It integrates natural language processing and music generation technologies to transform text into fully realized songs, including lyrics, melodies, and vocals. By interpreting the text prompt, Suno API generates custom songs that align with the user’s specific requirements in terms of genre, emotion, and style.\\
+
+Role:
+\begin{itemize}
+\item Song Lyrics Generation: Based on a text prompt, Suno API generates song lyrics automatically. For example, users can provide a theme or emotion, and the system will create relevant lyrics for a song.\\
+\item Music Composition: Suno API can generate accompanying music for the lyrics by interpreting the text prompt. It produces melodies, chords, and harmonies that align with the requested genre or mood.\\
+\item Vocal Synthesis: Once the song’s lyrics and music are generated, Suno API synthesizes vocals, delivering high-quality, human-like singing. The vocals are crafted to match the mood, tone, and style defined in the prompt.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Advanced Text-to-Music Translation: Suno API combines natural language processing (NLP) and music generation technologies to convert text-based prompts into full-fledged songs, including lyrics, melodies, and vocals.\\
+    \item Emotion and Mood Reflection: The system can analyze the emotion conveyed in the prompt (e.g., sadness, joy, love) and generate music that reflects this emotion, adjusting the melody, tempo, and vocal tone accordingly.\\
+    \item Zero-shot Learning: Suno API leverages zero-shot learning capabilities to generate songs in various genres and styles without requiring additional training data. It can adapt to new prompts and create custom songs immediately.\\
+\end{itemize}
+
 
 \subsubsection{Amazon S3}
 
@@ -784,6 +841,74 @@ Technical Features:
 \end{itemize}
 
 
+\subsubsection{Docker}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/Docker.jpg}
+    \caption{Docker}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Docker is an open-source platform that allows applications to be containerized, enabling consistent management of environments across development and production. It helps developers and operations teams build and deploy applications more efficiently. By running applications in isolated containers, Docker minimizes issues that can arise during the deployment process.\\
+
+Role:
+\begin{itemize}
+    \item Application Deployment: Docker reduces the gap between development and production environments, making it easy to deploy and run applications. This ensures applications can be consistently run across different environments.\\
+    \item Environment Isolation: Docker runs each application in an isolated container, resolving dependency issues between systems. It ensures that multiple applications do not conflict with each other.\\
+    \item CI/CD Integration: Docker is useful in continuous integration and deployment (CI/CD) environments, enabling fast and stable deployment of code changes.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Containerization: Docker packages the application and its environment into a single unit, allowing it to run consistently across different platforms.\\
+    \item Lightweight: Docker is more lightweight than virtual machines, using fewer system resources and allowing for faster startup and shutdown.\\
+    \item Networking and Storage: Docker makes it easy to manage networking and storage settings, facilitating smooth communication between containers.\\
+    \item Scalability: Docker can run hundreds of containers simultaneously, making it easy to scale and manage large applications.\\
+\end{itemize}
+
+Integration with Docker:
+\begin{itemize}
+    \item Spring Boot: Docker can containerize Spring Boot applications, automating deployment and minimizing the differences between environments. Spring Boot applications run within Docker containers, ensuring consistency between development and production environments.\\
+    \item Flask: Flask applications can also be containerized using Docker. This enables consistent execution across different environments, improving efficiency in deployment and maintenance.\\
+\end{itemize}
+
+
+\subsubsection{Apache Kafka}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{image/Kafka.png}
+    \caption{Apache Kafka}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Apache Kafka is a high-performance, distributed streaming platform used to handle large-scale, real-time data streams. Kafka is widely used for messaging systems, event sourcing, log aggregation, and building data pipelines. Built on a distributed architecture, Kafka provides high scalability and durability.\\
+
+Role:
+\begin{itemize}
+    \item Data Streaming: Kafka is used to process real-time data streams. It efficiently transmits data from producers to consumers in real-time, handling large volumes of data flow.\\
+    \item Event Sourcing: Kafka plays a crucial role in event-driven systems by sequentially recording and storing events, enabling subsequent processing of these events.\\
+    \item Data Pipelines: Kafka provides a pipeline for managing data flow between different systems, allowing seamless integration between multiple systems exchanging data.\\
+    \item Real-Time Analytics: Kafka is useful for real-time data analysis, enabling quick processing and extraction of insights from continuous data streams.\\
+\end{itemize}
+
+Technical Features:
+\begin{itemize}
+    \item Distributed Architecture: Kafka is designed with a clustered setup, providing high availability and fault tolerance. Data is distributed across multiple servers, ensuring continuous operation even in case of failures.\\
+    \item Scalability: Kafka can handle thousands of partitions, allowing it to scale efficiently even as data volume grows.\\
+    \item Durability: Kafka ensures data durability by continuously storing data on disk, preventing data loss and allowing for recovery in case of failures.\\
+    \item High Throughput: Kafka is known for its high throughput, capable of processing millions of messages per second.\\
+\end{itemize}
+
+Integration with Kafka:
+\begin{itemize}
+    \item Spring Boot: Kafka integrates well with Spring Boot applications, enabling the building of asynchronous, message-driven systems. The Spring Kafka library simplifies interactions with Kafka within Spring Boot projects.\\
+    \item Microservices: Kafka is ideal for service-to-service communication in microservices architectures. It allows services to communicate by sending and receiving events through Kafka, reducing tight coupling between services.\\
+    \item Real-Time Processing: Kafka can be used in combination with real-time processing frameworks like Apache Spark or Apache Flink to enable real-time data analytics and processing.\\
+\end{itemize}
+
+\clearpage
 
 \section{Specification}
 
@@ -798,7 +923,6 @@ Technical Features:
 
 \noindent When the user launches the app, the initial screen displays the 'LG Follow' logo and the 'Follow your Experience' tagline for 2–3 seconds. After a brief delay, the screen transitions smoothly to the login page.\\
 
-\clearpage
 
 \subsection{Log In}
 
@@ -811,28 +935,22 @@ Technical Features:
 
 \subsubsection{ID Input}
 \begin{itemize}
-    \item Placeholder: 'Email ID' to guide the user on the input type.\\
-    \item Input Format: Accepts either an email address.\\
+    \item Explanation: 'Email ID or Phone number ID' to guide the user on the input type.\\
+    \item Input Format: Accepts either an email address or phone number.\\
     \item Validation: Checks if the input follows the correct format
 \begin{itemize}
     \item Email: Format like user@example.com\\
+    \item Phone number: Format like 01012345678\\
 \end{itemize}
 \end{itemize}
 
 \subsubsection{Password Input}
 \begin{itemize}
-    \item Placeholder: Displays 'Password' as guidance for the user.\\
+    \item Explanation: Displays 'Password' as guidance for the user.\\
     \item Input Format: Accepts text for password entry, displayed as '\textbullet' symbols to conceal the input.\\
 \end{itemize}
 
-\subsubsection{Log in}
-\begin{itemize}
-    \item Enabled/Disabled State:
-\begin{itemize}
-    \item Enabled: The button becomes active once both ID and password are entered.\\
-    \item Disabled: The button remains inactive if the ID and password fields are empty.\\
-\end{itemize}
-\end{itemize}
+\subsubsection{Log In}
 \begin{itemize}
     \item Action: When clicked, the button attempts to log in with the provided ID and password.
 \begin{itemize}
@@ -841,8 +959,7 @@ Technical Features:
 \end{itemize}
 \end{itemize}
 
-
-\subsubsection{Log in Process}
+\subsubsection{Log In Process}
 \begin{itemize}
     \item Input Check: When the log in button is clicked, the ID and password are validated against database records.\\
     \item Password Hashing: The entered password is hashed using the SHA-256 algorithm before being compared to the stored hash in the database.\\
@@ -853,6 +970,7 @@ Technical Features:
 \end{itemize}
 \end{itemize}
 
+\clearpage
 
 \subsection{Main Page}
 
@@ -868,7 +986,7 @@ Technical Features:
 \subsubsection{Home Application Power On/Off}
 
 \begin{itemize}
-    \item Power Button: Turns individual appliances On/Off. (In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale with a strikethrough.)\\
+    \item Power Button: Turns individual appliances On/Off. (In the On state, the power button appears green, and in the Off state, it appears as a red button.\\
     \item When the user clicks the power button for a specific appliance, the application records the device's status (On/Off) in the database or local storage.\\
     \item Upon status change, the application sends a command to the appliance to toggle its power state.\\
     \item If the device is currently on, clicking the button will turn it off, and if it is off, clicking the button will turn it on.\\
@@ -876,7 +994,7 @@ Technical Features:
 
 \subsubsection{LG Follow Function On/Off}
 \begin{itemize}
-    \item Speaker Button: Controls the LG Follow function for audio playback in the room where the appliance is located.(In the On state, the power button is displayed in color, and in the Off state, it appears in grayscale with a strikethrough.\\
+    \item Speaker Button: Controls the LG Follow function for audio playback in the room where the appliance is located.(urns individual appliances On/Off. (In the On state, the speaker button is displayed, and in the Off state, it appears on the speaker button with a strikethrough.)\\
     \item User Location Detection
 \begin{itemize}
     \item PIR Sensors: PIR (Passive Infrared) sensors installed in each room detect the user’s movement. When the user enters a room, the PIR sensor in that room activates and sends the location data to the Raspberry Pi.\\
@@ -886,7 +1004,7 @@ Technical Features:
     \item Data Collection and Transmission by Raspberry Pi
 \begin{itemize}
     \item Raspberry Pi: Acts as a central hub that collects location data from all room PIR sensors. As the user moves from room to room, the Raspberry Pi updates the user’s location in real time.\\
-    \item Matter Protocol: Raspberry Pi communicates with AI speakers and other room speakers via the Matter protocol to control audio output based on the user’s current location.\\
+    \item Matter Protocol: Raspberry Pi communicates with other room speakers via the Matter protocol to control audio output based on the user’s current location.\\
 \end{itemize}
 \end{itemize}
 \begin{itemize}
@@ -906,9 +1024,11 @@ Technical Features:
 \subsubsection{Add Product Button ('+' Button)}
 \begin{itemize}
     \item Opens a QR code scanning screen to add a new appliance.\\
-    \item When the user clicks the '+' button, the application navigates to the QR code scanning screen.\\
+    \item When the user clicks the appliance button, the application navigates to the QR code scanning screen.\\
     \item The user can scan a QR code to register a new appliance, which will then be added to the home screen for control.\\
 \end{itemize}
+
+\clearpage
 
 \subsection{Device Registration}
 
@@ -969,7 +1089,7 @@ Technical Features:
 \end{figure}
 
 \noindent 
-When the user navigates to the menu page and selects the Sound Sketch button, the screen transitions smoothly to the Sound Sketch initial screen. The initial screen displays the 'Sound Sketch' logo at the center along with a clean design. After a brief moment, the screen transitions seamlessly to the main functionality of the Sound Sketch feature. \\
+When the user navigates to the menu page and presses the Sound Sketch button, the screen transitions smoothly to the Sound Sketch initial screen. The initial screen displays the 'Sound Sketch' logo at the center along with a clean design. After a brief moment, the screen transitions seamlessly to the main functionality of the Sound Sketch feature. \\
 
 \subsection{Sound Sketch Main Page}
 
@@ -980,47 +1100,44 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
     \label{fig:enter-label}
 \end{figure}
 
-\subsubsection{Record Section}
+\subsubsection{Quick Playlist Section}
 
 \begin{itemize}
-    \item The record section, located at the top, displays a list of previously created drawings along with their associated music.
+    \item The Quick Playlist section, located at the top, displays a list of previously created drawings along with their associated music.
 \begin{itemize}
     \item Thumbnail: Each record is shown as a thumbnail that displays the user’s actual drawing.\\
-    \item Label: A label is displayed below each thumbnail, allowing users to easily identify each record.\\
+    \item Label: A label is displayed below each thumbnail, showing the song title to help users easily identify each record.\\
 \end{itemize}
-    \item Functionality: Users can select a previous drawing to view the related music information or to play the associated audio.\\
-    \item Saving Records: When a user completes and saves a drawing, it is added to the record section. The actual drawing is displayed as a thumbnail in the record section, and the metadata for the generated music is stored in the MySQL database via Spring Boot.\\
-    \item Music Streaming: When a user selects a specific record thumbnail, the Flask server streams the associated music in real time, allowing the user to listen to it immediately.\\
+    \item Functionality: Users can select a previous drawing to view the related music information or to play the music.\\
+    \item Saved Playlist: When a user completes and saves a drawing, it is added to the record section. The actual drawing is displayed as a thumbnail in the record section, and the metadata for the generated music is stored in the MySQL database via Spring Boot.\\
+    \item Music Streaming: When a user selects a specific record thumbnail, the associated music is streamed in real-time, allowing the user to listen to it immediately.\\
 \end{itemize}
 
 \subsubsection{Temporary Storage Section}
 
 \begin{itemize}
-    \item The temporary storage section shows the currently active drawing that the user is working on.
+    \item The Temporary Storage section is located at the middle and shows the drawings that the user started but hasn't finished yet.
 \begin{itemize}
     \item Thumbnail: The thumbnail displays the user’s current drawing in a large square, making it easy to recognize.\\
 \end{itemize}
     \item Functionality: Even if the app is closed or the user switches tasks, the ongoing drawing is saved. When the user taps this thumbnail, they can resume working on the saved drawing.\\
-    \item Image Temporary Storage: When a user temporarily saves a drawing, the image data is stored in Redis, a fast-access cache database. This ensures that the user can pause or edit the drawing without losing data, thanks to Redis’s memory-based storage, which minimizes latency and enhances the user experience during the drawing process.\\
-    \item Temporary Data Recovery: When the user selects the saved drawing from the temporary storage section, Redis retrieves the data, allowing the user to resume their work seamlessly.\\
+    \item Image Temporary Storage: When a user temporarily saves a drawing, the image data is stored in a fast-access storage system. This ensures quick access and enhances the user experience by allowing seamless continuation during the drawing process.\\
+    \item Temporary Data Recovery: When the user selects the saved drawing from the Temporary Storage section, the data is retrieved, allowing the user to resume their work without interruption.\\
 
 \end{itemize}
 
-\subsubsection{New Start Button}
+\subsubsection{New Start Section}
 
 \begin{itemize}
-    \item The 'New Start' button at the bottom of the screen allows the user to begin a new drawing.\\
+    \item When the user drags the "Drag Up to Start" section at the bottom of the screen, they can begin a new drawing.\\
     \item Functionality 
 \begin{itemize}
-    \item Transition to Drawing Page: When clicked, the app navigates to a new page where the user can start a new drawing.\\
-    \item Temporary Data Reset: When a new project is started, the existing temporary data is reset or updated to save the new drawing.\\
+    \item Transition to Drawing Page: By dragging the button up, the user is taken to a new page where they can start a new drawing.\\
+    \item Temporary Data Reset: When a new project is started, the existing temporary data is either reset or updated to prepare for saving the new drawing.\\
 
 \end{itemize}
 \end{itemize}    
-\begin{itemize}
-    \item Reset and Transition to New Page: When the user clicks the New Start button, the current temporary data is reset, and the app navigates to the drawing page to start a fresh project.\\
-    \item Data Management: For every new drawing, Redis either deletes or updates the previous temporary data to store the new drawing as the latest temporary data.\\
-\end{itemize}
+
 
 \subsection{Sketch Page }
 
@@ -1033,39 +1150,30 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
 
 \subsubsection{Canvas Section}
 \begin{itemize}
-    \item The gray background area in the center of the screen serves as a canvas where users can draw freely. This section is dedicated to allowing users to create and edit their drawings.\\
+    \item The white rectangle area in the center of the screen serves as a canvas where users can draw freely. This section is dedicated to allowing users to create and edit their drawings.\\
     \item Drawing Canvas: An interactive canvas where users can draw using various lines and colors.\\
 \end{itemize}
 
 \subsubsection{Submit Button}
 \begin{itemize}
     \item Allows users to submit the completed drawing to the server for music generation.\\
-    \item When clicked, the drawing is temporarily saved in Redis, then sent to the AI system via the Flask server, where music based on the drawing will be generated.\\
 \end{itemize}
 
 \subsubsection{Delete Button}
 \begin{itemize}
     \item Provides an option to delete the current drawing on the canvas.\\
-    \item When clicked, the current drawing is removed from temporary storage, and the canvas is cleared for a fresh start. A confirmation message may be shown to confirm deletion.\\
 \end{itemize}
 
-\subsubsection{Expand Icon}
+\subsubsection{File Icon}
 \begin{itemize}
-    \item Allows users to view the drawing in full-screen mode for more detailed work.\\
-    \item When clicked, the canvas expands to full screen, providing a larger workspace for more precise drawing.\\
+    \item Sound Sketch allows you to create songs by attaching image files.\\
 \end{itemize}
 
 \subsubsection{Back Icon}
 \begin{itemize}
     \item Allows users to return to the Sound Sketch main page.\\
-    \item When clicked, the current drawing is temporarily saved in Redis, ensuring it is stored before navigating back to the Sound Sketch main page.\\
+    \item When clicked, the current drawing is temporarily saved, ensuring it is securely stored before navigating back to the Sound Sketch main page.\\
 \end{itemize}
-
-\subsubsection{Bottom Navigation Bar}
-\begin{itemize}
-    \item Home, ThinQ, LG Follow Tabs: The bottom navigation bar allows users to switch between the main sections of the app without losing their current work on the Sketch screen.\\
-\end{itemize}
-
 
 \section{Architecture Design}
 
@@ -1083,10 +1191,11 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
  \subsubsection{Frontend}
  \begin{itemize}
      \item Framework: Flutter\\
+     \item Design tool: Figma
      \item Summary of features:
 \begin{itemize}
     \item Provides a canvas screen that allows users to draw and send their drawings to the backend.\\
-    \item Offers toggle buttons to turn LG appliances' power and speakers On/Off.\\
+    \item Offers toggle buttons to turn LG appliances power and speakers On/Off.\\
     \item Enables QR scanning to register LG appliances in the LG Follow app.\\
     \item Provides a user interface to access previously created songs.\\
     \item Displays an interface to view unfinished drawings.\\
@@ -1099,12 +1208,12 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
     \item Database: My SQL. RDS\\
     \item Data storage: AWS S3\\
     \item API: Suno API\\
+    \item Application tool: Apache Kafka, Docker 
     \item Summary of features:
 \begin{itemize}
     \item Generates songs based on prompts.\\
     \item Stores user-drawn illustrations and the generated songs.\\
-    \item Allows temporary saving of drawings.\\
-    \item Enables registration of LG appliances.\\
+    \item It enables sound transmission between speakers.\\
 \end{itemize}
 \end{itemize}
 
@@ -1112,14 +1221,8 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
 \begin{itemize}
     \item Web Framework: Flask\\
     \item AI Model: BLIP (Bootstrapping Language-Image Pre-training)\\
-    \item Summary of features: Extracts prompts from user-drawn illustrations.
+    \item Summary of features: Extracts prompts from user-drawn illustrations.\\
 \end{itemize}
-
-
-\clearpage
-
-
-
 
 
 \subsection{Overall Directory Organization}
@@ -1133,7 +1236,7 @@ When the user navigates to the menu page and selects the Sound Sketch button, th
 
 The LG Follow project consists of four GitHub repositories: Frontend, Backend, AI, and Document. Each repository plays a distinct role in the project’s architecture and development.\\
 
-The Frontend repository focuses on developing the user interface and application for LG Follow. It includes code and resources to support multiple platforms such as Android and iOS. The lib directory contains the core business logic and UI components of the frontend application. It handles essential functionalities such as screen navigation, state management, and user interactions. Additionally, assets like images are stored in the assets/images folder, while configuration and dependency management files, such as pubspec.yaml and analysis\_options.yaml, ensure efficient project maintenance.\\
+The Frontend repository is responsible for developing the user interface and application for LG Follow. It includes code and resources to support multiple platforms, such as Android and iOS. The lib directory contains the core business logic and UI components of the frontend application, handling essential functionalities like screen navigation, state management, and user interactions. Additionally, configuration and dependency management files, such as pubspec.yaml and analysis options.yaml, are included to ensure efficient project maintenance.\\
 \
 
 The Backend repository is responsible for server-side logic in LG Follow. This repository includes all the necessary files to handle user requests, data processing, and other backend operations. The main implementation is located in the src directory, while Gradle build scripts (build.gradle, settings.gradle) and Docker configuration files (compose.yaml) support deployment and build automation.\\
@@ -1145,15 +1248,14 @@ The Document repository is responsible for managing the documentation of the LG 
 \subsection{Module 1: Backend}
 
 \subsubsection{Purpose}
-\noindent To implement the backend, we used Spring Boot to build an application, streamlining the development process with its well-organized ecosystem and simple configuration. For database management, we adopted AWS RDS, which provided a centralized and scalable solution. This setup enabled the team to collaborate effectively and handle data efficiently throughout the project. The centralized database allowed shared access and simplified maintenance tasks, significantly improving overall productivity. Additionally, we integrated the MQTT protocol to facilitate real-time communication with Raspberry Pi. This implementation allowed for efficient data exchange and control between the backend and the device.\\
+\noindent To implement the backend, we used Spring Boot to build an application, streamlining the development process. For database management, we adopted Amazon RDS, which provided a centralized and scalable solution. This setup enabled the team to collaborate effectively and handle data efficiently throughout the project. The centralized database allowed shared access and simplified maintenance tasks, significantly improving overall productivity. Additionally, we integrated the MQTT protocol to facilitate real-time communication with Raspberry Pi. This implementation allowed for efficient data exchange and control between the backend and the device.\\
 
 \subsubsection{Functionality}
-\noindent The LG Follow server is responsible for executing tasks requested by users through the frontend, NUGU, and Raspberry Pi. It processes data and stores corresponding values in the database. When a user requests song creation, the server generates the song, saves it to the database, and delivers it to the frontend. Similarly, when a query request is made, the server utilizes the received values to provide the requested information. Additionally, the server manages IoT devices via MQTT communication, ensuring seamless device control and interaction.\\
+\noindent The LG Follow server executes tasks requested by users through the frontend and Raspberry Pi. It processes data and stores the corresponding values in the database. When a user requests song creation, the server generates the song, saves it to the database, and delivers it to the frontend. Additionally, it ensures smooth sound transmission between the Raspberry Pi devices using the MQTT protocol.\\ 
 
 \subsubsection{Location of source code: }
 \url{https://github.com/LG-Follow/Back_End}\\
 
-\clearpage
 
 
 \begin{table}[h!]
@@ -1182,7 +1284,7 @@ The Document repository is responsible for managing the documentation of the LG 
     \end{tabular}
 \end{table}
 
-\subsubsection{Class component}
+\subsubsection{Class Component}
 
 \begin{itemize}
     \item LgFollowServerApplication.java: This is a file for Spring Boot Application entrypoint. \\
@@ -1261,7 +1363,19 @@ The Document repository is responsible for managing the documentation of the LG 
 \subsubsection{Fuctionality}
 \noindent The model takes an input image and generates a descriptive prompt based on its visual features. This functionality allows the user to easily extract meaningful textual descriptions from various types of images, such as real-world photos or hand-drawn sketches. The model was trained using the Flickr30k dataset, enabling it to recognize and describe a wide range of visual elements effectively.\\
 
-\
+\subsubsection{Result of Fine-turned BLIP Model}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image/Cat.jpeg}
+    \caption{Example picture}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{itemize}
+    \item The output caption of the original BLIP model: a cat laying on the floor.\\
+    \item The output caption of the fine-tuned BLIP model: a brown cat is laying on the floor with its eyes wide open.\\
+\end{itemize}
+
 
 \subsubsection{Location of source code:}
 \url{https://github.com/LG-Follow/AI}\\
@@ -1281,7 +1395,7 @@ The Document repository is responsible for managing the documentation of the LG 
     \end{tabular}
 \end{table}
 
-\subsubsection{Class component}
+\subsubsection{Class Component}
 \begin{itemize}
     \item main.py: The main entry point of the project. \\
     \item train\_model.py: Script for training the BLIP model using provided configurations and datasets. \\
@@ -1304,7 +1418,6 @@ The Document repository is responsible for managing the documentation of the LG 
     \end{itemize}
 \end{itemize}
 
-\clearpage
 
 \subsection{Module 3: Frontend}
 
@@ -1314,15 +1427,12 @@ The Document repository is responsible for managing the documentation of the LG 
 \subsubsection{Functionality}
 \noindent Users can draw on a canvas screen and send their drawings to the backend. Additionally, it offers toggle buttons to turn LG appliances' power and speakers On/Off. The application also allows users to register LG appliances in the LG Follow app via QR code scanning. Furthermore, it provides a user interface to access previously created songs and a screen to view unfinished drawings.\\
 
-\subsubsection{Location of source code:}
-\url{https://github.com/LG-Follow/Front-End}\\
-
-\subsubsection{MVVM pattern (Model, View, ViewModel)}
+\subsubsection{Using MVVM Pattern (Model, View, ViewModel)}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{image/Frontend.png}
-    \caption{lib Directory Organization}
+    \includegraphics[width=1.07\linewidth]{image/그림1.png}
+    \caption{MVVM Pattern}
     \label{fig:enter-label}
 \end{figure}
 \noindent The View delivers user input to the ViewModel, which then processes the data or requests further information from the Model based on the input. Subsequently, the View subscribes to the ViewModel using tools like Providers, Streams, or state management techniques and updates the display to reflect the updated data state.\\
@@ -1337,6 +1447,10 @@ The Document repository is responsible for managing the documentation of the LG 
     \item Abstraction of View: The View does not directly handle data but communicates with the ViewModel to send and receive data. The ViewModel serves as an intermediary between the UI and the business logic, reducing the coupling between them and improving maintainability.\\  
 \end{itemize}
 \end{itemize}
+
+\subsubsection{Location of source code:}
+\url{https://github.com/LG-Follow/Front-End}\\
+
 
 \begin{table}[h!]
 \caption{Frontend Directory Organization}
@@ -1404,7 +1518,7 @@ The Document repository is responsible for managing the documentation of the LG 
 \end{tabular}
 \end{table}
 
-\subsubsection{Class component}
+\subsubsection{Class Component}
 \begin{itemize}
     \item .metadata: Contains project metadata. \\
     \item analysis\_options.yaml: Configuration for static code analysis. \\
@@ -1446,60 +1560,63 @@ The Document repository is responsible for managing the documentation of the LG 
 
     \item lib: Contains the main Dart code for the application, including business logic, UI, and state management.
     \begin{itemize}
-        \item model: Contains data models representing the app's structure and behavior.
-        \begin{itemize}
-            \item Drawing.dart: Represents a drawing model, including rendering and storage details. \\
-            \item Login.dart: Handles user login data. \\
-            \item Point.dart: A data model for coordinates or positions. \\
-            \item device.dart: Represents connected devices. \\
-            \item drawing\_painter.dart: Utility for managing drawings. \\
-            \item home.dart: Structure for the home screen's data model. \\
-            \item menu.dart: Represents menu configurations. \\
-            \item product.dart: A data structure that represents home appliances information. \\
-            \item sketch\_home.dart: Model for sketching features on the home screen. \\
-            \item song.dart: Represents song-related metadata. \\
+\item model: Contains data models representing the app's structure and behavior.
+\begin{itemize}
+    \item Drawing.dart: Defines a class for storing user-drawn sketches. \\
+    \item Login.dart: Manages user login information. \\
+    \item Point.dart: Represents point data in a sketch. \\
+    \item Temp.dart: Manages temporarily saved data. \\
+    \item device.dart: Stores information about IoT devices (e.g., speakers) to support appliance-related functionality. \\
+    \item drawing\_painter.dart: Implements rendering and painting functionality for sketches. \\
+    \item home.dart: Manages data related to the home screen (registered appliances). \\
+    \item menu.dart: Manages menu information (e.g., option lists, icons). \\
+    \item product.dart: Manages appliance addition (e.g., selecting which appliance to add). \\
+    \item sketch\_home.dart: Manages data needed for the Sound Sketch home screen. \\
+    \item song.dart: Manages song data such as title, URL, and creation date. \\
+\end{itemize}
+
+\item view: Contains UI components and widgets.
+\begin{itemize}
+    \item Drawing\_view.dart: Provides a UI for creating or editing sketches. \\
+    \item Follow\_view.dart: Sets up the app's initial screen (loading screen). \\
+    \item Login\_view.dart: User login screen. \\
+    \item Sound.dart: Loading screen for navigating to the Sound Sketch feature. \\
+    \item home\_view.dart: Implements the UI for the home screen. \\
+    \item menu\_view.dart: Displays the app's menu. \\
+    \item product\_view.dart: Displays a list of appliances to add. \\
+    \item qr\_scan\_view.dart: QR code scanning screen. \\
+    \item sketch\_home\_view.dart: Displays key features (e.g., sketches, temporary data) on the Sound Sketch home screen. \\
+    \item song\_list\_view.dart: Displays a list of songs and allows users to select one. \\
+\end{itemize}
+
+\item viewModel: Contains state management and logic.
+\begin{itemize}
+    \item Drawing\_view\_model.dart: Handles and manages sketch data, connecting the View and Model, and converts sketches to FormData or PNG format. \\
+    \item Login\_view\_model.dart: Handles login logic and user authentication. \\
+    \item Temp\_view\_model.dart: Manages logic for temporarily saved data. \\
+    \item home\_view\_model.dart: Manages data logic for the home screen. \\
+    \item menu\_view\_model.dart: Manages logic related to menu selection. \\
+    \item product\_view\_model.dart: Handles logic for adding appliances. \\
+    \item qr\_scan\_view\_model.dart: Manages QR code scanning logic and processing. \\
+    \item sketch\_home\_view\_model.dart: Manages data and actions for the Sound Sketch home screen. \\
+    \item song\_view\_model.dart: Manages the song list and playback state, connecting the UI and Model. \\
+\end{itemize}
+\end{itemize}
         \end{itemize}
 
-        \item view: Contains UI components and widgets.
-        \begin{itemize}
-            \item Drawing\_view.dart: UI for user drawings. \\
-            \item Follow\_view.dart: Loading screen. \\
-            \item Login\_view.dart: UI for the login page. \\
-            \item Sound.dart: Loading screen.\\
-            \item home\_view.dart: UI for the home screen. \\
-            \item menu\_view.dart: User interface for the menu. \\
-            \item product\_view.dart: List of home appliances that can be registered in the LG Follow app. 
-            \item qr\_scan\_view.dart: Interface for QR code scanning. \\
-            \item sketch\_home\_view.dart: UI for Sound Sketch home. \\
-            \item song\_list\_view.dart: Lists and manages songs. \\
-        \end{itemize}
-
-        \item viewModel: Contains state management and logic.
-        \begin{itemize}
-            \item Drawing\_view\_model.dart: Manages drawings and updates the view. \\
-            \item Login\_view\_model.dart: Handles login logic. \\
-            \item home\_view\_model.dart: Manages home screen data and interactions. \\
-            \item menu\_view\_model.dart: Handles menu settings and data. \\
-            \item product\_view\_model.dart:Implementation of home appliances data management and search functionality. \\
-            \item qr\_scan\_view\_model.dart: Processes QR code scans. \\
-            \item sketch\_home\_view\_model.dart: State management for sketch-related views. \\
-            \item song\_view\_model.dart: Handles song-related logic. \\
-        \end{itemize}
-    \end{itemize}
-
+\begin{itemize}
     \item linux: Contains Linux-specific files and configurations.
-    \begin{itemize}
-        \item CMakeLists.txt: Build system configurations for Linux. \\
-        \item flutter: Contains files for integrating Flutter with Linux. \\
-    \end{itemize}
-
+\begin{itemize}
+    \item 
+\end{itemize}
+\end{itemize}
     \item macos: Contains macOS-specific files and configurations.
     \begin{itemize}
         \item .gitignore: Specifies ignored files in the macOS directory. \\
         \item Flutter: Contains macOS-specific Flutter configurations. \\
         \item Runner: Contains app-specific files, such as Info.plist and app icons. \\
     \end{itemize}
-
+\begin{itemize}
     \item pubspec.yaml: Lists dependencies and assets for the project. \\
     \item test: Contains unit tests for the application. \\
     \item web: Contains web-specific files for deploying the app as a web application. \\
@@ -1516,7 +1633,7 @@ The Document repository is responsible for managing the documentation of the LG 
     \label{fig:enter-label}
 \end{figure}
 
-\noindent The LG Follow Loading Page briefly appears when users turn on the application. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
+\noindent The LG Follow loading page briefly appears when users turn on the application. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
 
 
 \subsection{Log in}
@@ -1527,7 +1644,7 @@ The Document repository is responsible for managing the documentation of the LG 
     \label{fig:enter-label}
 \end{figure}
 
-\noindent Login Page is a page which allows users to log in by entering their id and password.\\
+\noindent Login page is a page which allows users to log in by entering their id and password.\\
 
 
 \subsection{Main Page}
@@ -1539,7 +1656,7 @@ The Document repository is responsible for managing the documentation of the LG 
     \label{fig:enter-label}
 \end{figure}
 
-\noindent The Main Page is where users can view registered devices or register new ones using a QR code. In the center of the page, users can toggle the speaker functionality on or off for each registered device using the button next to it. Below the last listed device, the Add Appliance button enables users to scan a QR code to register a new device. The bottom navigation bar offers options to return to the Main Page or navigate to the Menu Page.\\
+\noindent The Main page is where users can view registered devices or register new ones using a QR code. In the center of the page, users can toggle the speaker functionality on or off for each registered device using the button next to it. Below the last listed device, the Add Appliance button enables users to scan a QR code to register a new device. The bottom navigation bar offers options to return to the Main Page or navigate to the Menu Page.\\
 
 \clearpage
 
@@ -1566,7 +1683,7 @@ The Document repository is responsible for managing the documentation of the LG 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{image/Menu.png}
-    \caption{Caption}
+    \caption{Menu Page}
     \label{fig:enter-label}
 \end{figure}
 
@@ -1583,7 +1700,7 @@ Users can click this button to access the Sound Sketch service. The menu page al
     \label{fig:enter-label}
 \end{figure}
 
-\noindent The Sound Sketch Loading Page briefly appears when users click on Sound Sketch from the main page. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
+\noindent The Sound Sketch loading page briefly appears when users click on Sound Sketch from the main page. This page is displayed while the application is preparing. Once the loading is complete, it automatically transitions to the next page.\\
 
 
 \subsection{Sound Sketch Main Page}
@@ -1594,7 +1711,7 @@ Users can click this button to access the Sound Sketch service. The menu page al
     \label{fig:enter-label}
 \end{figure}
 
-\noindent The Sound Sketch main page is divided into three main sections. At the top, there is a Record button that allows users to navigate to a page displaying all the songs they have created so far, with the four most recently created songs displayed below for quick access. Dragging up the Drag Up to Start area at the bottom of the screen opens a drawing canvas where users can start creating. The Temporary Save section in the middle shows drawings that users paused earlier, allowing them to resume their work seamlessly.\\
+\noindent The Sound Sketch main page is divided into three main sections. At the top, there is a Quick playlist section that allows users to navigate to a page displaying all the songs they have created so far, with the four most recently created songs displayed below for quick access. Dragging up the Drag Up to Start area at the bottom of the screen opens a drawing canvas where users can start creating. The Temporary Save section in the middle shows drawings that users paused earlier, allowing them to resume their work seamlessly.\\
 
 
 \subsection{Sketch Page}
@@ -1605,30 +1722,10 @@ Users can click this button to access the Sound Sketch service. The menu page al
     \label{fig:enter-label}
 \end{figure}
 
-\noindent On the Sound Sketch Create Page, users can draw on the central canvas, selecting from a variety of brush thicknesses and colors to create their artwork. The Delete button at the top lets users erase their current drawing, and the Submit button to its right enables them to generate music from their drawing.\\
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\noindentOn the Sketch page, users can draw on the central canvas, selecting from a variety of brush thicknesses and colors to create their artwork. The Delete button at the top lets users erase their current drawing, and the Submit button to its right enables them to generate music from their drawing. Additionally, by clicking the File icon, users can attach an image file, allowing them to import a pre-made image and use it for music generation.\\
 
 
 
 
 
 \end{document}
-
-
-
